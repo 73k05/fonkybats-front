@@ -21,4 +21,4 @@ bin-release/
 .idea
 
 # Libs
-bootstrap-5.1.3-dist/
+libs/

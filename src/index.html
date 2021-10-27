@@ -15,23 +15,26 @@
     <meta content="1634558495" name="og:updated_time">
 
     <!-- BootStrap 5 -->
-    <link crossorigin="anonymous" href="./bootstrap-5.1.3-dist/css/bootstrap.min.css"
+    <link crossorigin="anonymous" href="./libs/bootstrap-5.1.3-dist/css/bootstrap.min.css"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
     <script crossorigin="anonymous"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-            src="./bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
+            src="./libs/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
 <div class="container" id="page">
     <div class="content text-center">
         <div class="row">
-            <img src="./resources/fonkybats-bg.jpeg" alt="FonkyBats Background">
+            <img alt="FonkyBats Background" src="./resources/fonkybats-bg.jpeg">
         </div>
 
         <div class="row justify-content-center">
-            <label for="nftRange">Number Of NFTs to Mint</label>
-            <input class="form-range w-25 p-3" id="nftRange" max="10" min="0" type="range">
+            <label for="nftRange">Number Of NFTs to Mint: </label> <span id="nftToMintNumber">5</span>
+            <div class="range">
+                <input class="form-range w-25 p-3" id="nftRange" max="10" min="0" type="range" onInput="$('#nftToMintNumber').html($(this).val())">
+            </div>
         </div>
 
         <div class="row justify-content-center">
@@ -40,5 +43,7 @@
     </div>
 </div>
 </body>
+
+<script src="./libs/jquery-3.6.0.js" crossorigin="anonymous"></script>
 
 </html>
