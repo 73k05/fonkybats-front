@@ -19,3 +19,6 @@ bin-release/
 
 #IDE config folder
 .idea
+
+# Libs
+bootstrap-5.1.3-dist/
