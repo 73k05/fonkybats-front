@@ -1,0 +1,13 @@
+/*Dark Mode*/
+:root {
+    --primary-color: #141414;
+}
+body {
+    background-color: var(--primary-color)
+}
+label{
+    color: #306AF0;
+}
+span{
+    color: #306AF0;
+}
