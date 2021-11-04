@@ -32,21 +32,24 @@
         </div>
 
         <div class="row justify-content-center">
-            <label for="nftRange">Number Of NFTs to Mint: </label> <span id="nftToMintNumber">5</span>
+            <label for="nftRange">Number Of NFTs to Mint: </label> <span id="nftToMintNumber">2</span>
             <div class="range">
-                <input class="form-range w-25 p-3" id="nftRange" max="10" min="0" type="range" onInput="$('#nftToMintNumber').html($(this).val())">
+                <input class="form-range w-25 p-3" id="nftRange" max="3" min="1" onInput="$('#nftToMintNumber').html($(this).val())"
+                       type="range">
             </div>
         </div>
 
         <div class="row justify-content-center">
-            <button id="nftClaim" class="btn btn-primary w-25 p-3" type="button" onclick="mintNfts(document.getElementById('nftRange').value)">Claim</button>
+            <button class="btn btn-primary w-25 p-3" id="nftClaim" onclick="mintNfts(document.getElementById('nftRange').value)"
+                    type="button">Claim
+            </button>
         </div>
     </div>
 </div>
 </body>
 
-<script src="libs/jquery-3.6.0.js" crossorigin="anonymous"></script>
-<script src="libs/web3js/web3.min.js" crossorigin="anonymous"></script>
-<script type="text/javascript"  src="fonkybats.js"></script>
+<script crossorigin="anonymous" src="libs/jquery-3.6.0.js"></script>
+<script crossorigin="anonymous" src="libs/web3js/web3.min.js"></script>
+<script src="fonkybats.js" type="text/javascript"></script>
 
 </html>

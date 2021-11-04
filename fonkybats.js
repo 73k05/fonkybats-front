@@ -1,4 +1,4 @@
-const NFT_CONTRACT_ADDRESS = "0x5eF9A14913c6a01472BE756a1EEac72569918e48";
+const NFT_CONTRACT_ADDRESS = "0x3E37249bb6dcF9561665Af99aA99599FaFA2a3F5";
 const OWNER_ADDRESS = "0x9Ad99955f6938367F4A703c60a957B639D250a95";
 const NODE_API_KEY = "pXVRmm1TsgoZMNJGcG0zoiqPQJODSDvd";
 
@@ -31,9 +31,7 @@ const web3 = new Web3(Web3.givenProvider, "https://eth-" + network + ".alchemyap
  * @returns {Promise<void>}
  */
 async function mintNfts(numFonkyBats) {
-    console.log(`Mint NFTs: ${numFonkyBats}`)
-    accounts = await web3.eth.requestAccounts();
-    console.log(accounts);
+    let accounts = await web3.eth.requestAccounts();
 
     const nftContract = new web3.eth.Contract(
         NFT_ABI,
@@ -42,18 +40,19 @@ async function mintNfts(numFonkyBats) {
     );
 
     // Creatures issued directly to the owner.
-    for (var i = 0; i < numFonkyBats; i++) {
-        console.log(`Mint nft number ${i}`);
+    for (let i = 0; i < numFonkyBats; i++) {
         let result
         try {
+            const mintAddress = accounts[0]
+            console.log(`Mint nft-s ${i + 1} from [${OWNER_ADDRESS}] to [${mintAddress}]`);
             result = await nftContract.methods
-                .mintTo(accounts[0])
+                .mintTo(mintAddress)
                 .send({from: OWNER_ADDRESS});
         } catch (error) {
             console.error(`Error while minting...`)
             console.error(error)
             return;
         }
-        console.log("Minted creature. Transaction: " + result.transactionHash);
+        console.log("Minted Bats successfully. Transaction: " + result.transactionHash);
     }
 }
