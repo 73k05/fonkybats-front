@@ -1,0 +1,37 @@
+/* -------
+Reset css
+------- */ 
+
+html {
+  box-sizing: border-box; /* natural box layout model to all elements */
+  font-size: 62.5%; /* for easy rem sizing: 1rem = 10px */
+}
+
+/* allow modules to change the box-sizing */
+*,
+*::after,
+*::after {
+  box-sizing: inherit;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--grayAA);
+  font-family: var(--stolzl);
+  font-size: 1.6rem;
+  font-weight: var(--book);
+  margin: 0;
+}
+
+a {
+  color: var(--color-primary);
+  transition: color 0.2s ease;
+}
+a:hover,
+a:focus-visible {
+  color: var(--color-primary-darken);
+}
