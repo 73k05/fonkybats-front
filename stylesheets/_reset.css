@@ -21,9 +21,9 @@ html, body {
 body {
   background-color: var(--black);
   color: var(--grayAA);
-  font-family: var(--stolzl);
+  font-family: var(--roboto);
   font-size: 1.6rem;
-  font-weight: var(--book);
+  font-weight: var(--medium);
   margin: 0;
 }
 

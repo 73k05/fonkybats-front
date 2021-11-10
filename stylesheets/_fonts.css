@@ -1,7 +1,7 @@
 :root {
-  --stolzl: "stolzl", sans-serif;
+  --roboto: roboto, sans-serif;
+  --ubuntu: ubuntu, sans-serif;
 
-  --book: 300;
   --regular: 400;
   --medium: 500;
   --bold: 700;

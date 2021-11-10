@@ -1,0 +1,80 @@
+/* -------
+footer components
+------- */ 
+
+.footer {
+  padding: 6rem 2rem 7.5rem;
+  margin: 0 auto;
+  max-width: 100rem;
+  width: 100%;
+}
+
+/* logo */
+.footer-logo {
+  display: block;
+  margin: 0 auto;
+  object-fit: cover;
+  width: 54rem;
+}
+
+/* container */
+.footer-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+}
+
+.footer-right,
+.footer-left {
+  flex: 1;
+}
+
+/* nav */
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-nav > a {
+  color: var(--grayAA);
+  font-size: 1.6rem;
+  font-weight: var(--regular);
+  line-height: 2.8rem;
+  padding: 0.9rem 0;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.footer-nav > a:hover,
+.footer-nav > a:focus-visible {
+  color: var(--white);
+}
+.footer-nav > a.is-active {
+  color: var(--color-primary);
+}
+
+/* social */
+.footer-social {
+  align-items: center;
+  display: flex;
+  justify-content: end;
+  list-style-type: none ;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-social > li {
+  margin-left: 3rem;
+}
+
+/* copyright */
+.footer-copyright {
+  color: var(--grayAA);
+  display: block;
+  font-size: 1.4rem;
+  font-weight: var(--regular);
+  line-height: 2.8rem;
+  margin-top: 3.2rem;
+  text-align: right;
+}
+
