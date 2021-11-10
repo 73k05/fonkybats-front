@@ -75,3 +75,7 @@ Accordion components
   height: 0;
   transition: 0.5s;
 }
+
+.accordion-content > p {
+  margin: 0;
+}

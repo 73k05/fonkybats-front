@@ -40,6 +40,15 @@ h1, h2, h3, h4, h5, p {
   margin: 0;
 } 
 
+p {
+  font-size: 1.8rem;
+  line-height: 3rem;
+}
+
+p > span {
+  color: var(--white);
+}
+
 /* container */
 .container {
   background-image: url("../resources/bg-fonkybats.jpg");
@@ -47,6 +56,6 @@ h1, h2, h3, h4, h5, p {
   background-size: 100%;
   margin: 0 auto;
   max-width: 132rem;
-  padding-bottom: 12rem;
+  padding: 0 2rem 12rem;
   width: 100%;
 }

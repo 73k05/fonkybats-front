@@ -1,0 +1,103 @@
+/* -------
+Accordion components
+------- */ 
+
+.about {
+  padding: 10rem 0 12rem;
+}
+
+/* intro */
+.about-intro {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* content */
+.about-content {
+  flex: 1;
+}
+
+.about-heading {
+  align-items: center;
+  color: var(--grayAA);
+  display: flex;
+  font-family: var(--ubuntu);
+  font-size: 1.4rem;
+  font-weight: var(--bold);
+  margin-bottom: 4rem;
+  text-transform: uppercase;
+}
+.about-heading:after {
+  background-color: var(--grayAA);
+  content: '';
+  display: block;
+  height: 1px;
+  margin-left: 2.4rem;
+  width: 14rem;
+}
+
+.about-title {
+  margin-bottom: 4rem;
+  max-width: 34rem;
+}
+
+.about-content > p {
+  margin-bottom: 2rem;
+  max-width: 56rem;
+  width: 100%;
+}
+
+/* aside */
+.about-aside {
+  flex: 0 0 auto;
+  margin-left: 4rem;
+}
+
+.about-aside > img {
+  border-radius: 0.4rem;
+  border: 0.3rem solid var(--color-secondary);
+  box-shadow: 0 1rem 4rem #1EC1B34D;
+  height: 56rem;
+  object-fit: cover;
+  width: 56rem;
+}
+
+/* helmet */
+.about-helmet {
+  margin-top: 12rem;
+}
+
+.about-subtitle {
+  color: var(--white);
+  font-family: var(--ubuntu);
+  font-size: 3.2rem;
+  font-weight: var(--bold);
+  line-height: 4.4rem;
+  margin-bottom: 4rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.about-helmet-items {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.about-helmet-items > li {
+  flex: 0 0 auto;
+  padding: 0 1.5rem;
+}
+
+.about-helmet-item {
+  border-radius: 0.2rem;
+  border: 0.3rem solid var(--color-secondary);
+  box-shadow: 0 1rem 4rem #1EC1B34D;
+  height: 30rem;
+  object-fit: cover;
+  width: 30rem;
+}
