@@ -1,0 +1,77 @@
+/* -------
+Accordion components
+------- */ 
+
+.accordion {
+  margin: 0 auto;
+  max-width: 132rem;
+  padding: 24rem 2rem 15rem;
+  width: 100%;
+}
+
+/* title */
+.accordion-title {
+  margin-bottom: 9rem;
+  text-align: center;
+}
+
+.accordion-title > h3 {
+  color: var(--white);
+  font-family: var(--ubuntu);
+  font-size: 3.8rem;
+  font-weight: var(--bold);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* body */
+.accordion-body {
+  border-bottom: 0.2rem solid var(--gray44);
+  position: relative;
+  transition: 0.5s all;
+}
+
+.accordion-body.active .accordion-content {
+  height: 10rem;
+}
+.accordion-body.active .accordion-label:before {
+  content: '-';
+  font-size: 3rem;
+  font-weight: var(--bold);
+}
+
+.accordion-label {
+  color: var(--white);
+  cursor: pointer;
+  font-family: var(--ubuntu);
+  font-size: 2rem;
+  font-weight: var(--bold);
+  line-height: 1;
+  padding: 3.2rem 0;
+  position:relative;
+  text-align: left;
+  text-transform: uppercase;
+}
+.accordion-label:before {
+  color: var(--white);
+  content: '+';
+  cursor: pointer;
+  font-size: 3rem;
+  font-weight: var(--bold);
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translatey(-50%);
+  transition: 0.5s all;
+}
+
+/* content */
+.accordion-content {
+  color: var(--grayAA);
+  font-family: var(--roboto);
+  font-size: 1.8rem;
+  line-height: 2.8rem;
+  overflow: hidden;
+  height: 0;
+  transition: 0.5s;
+}

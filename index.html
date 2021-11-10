@@ -36,28 +36,135 @@
                 <li><a href="#" target="_blank" title="fonkybats discord">twitter</a></li>
             </ul>
         </div>
-        
+
+        <div class="row justify-content-center">
+            <label for="nftRange">Number Of NFTs to Mint: </label> <span id="nftToMintNumber">2</span>
+            <div class="range">
+                <input class="form-range w-25 p-3" id="nftRange" max="3" min="1" onInput="$('#nftToMintNumber').html($(this).val())"
+                    type="range">
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <button class="btn btn-primary w-25 p-3" id="nftClaim" onclick="mintNfts(document.getElementById('nftRange').value)"
+                    type="button">Claim
+            </button>
+        </div>
     </header>
 
-    <div class="container" id="page">
-        <div class="content text-center">
-            <div class="row">
-                <img alt="FonkyBats Background" src="resources/fonkybats-bg.jpeg">
+    <div class="accordion">
+        <div class="accordion-title">
+          <h3>Frequently asked questions</h3>
+        </div>
+        <div class="accordion-section">
+           <div class="accordion-body">
+            <div class="accordion-label">
+                <h4>When I will be able to Mint some Fonkybats ?<h4>
             </div>
-
-            <div class="row justify-content-center">
-                <label for="nftRange">Number Of NFTs to Mint: </label> <span id="nftToMintNumber">2</span>
-                <div class="range">
-                    <input class="form-range w-25 p-3" id="nftRange" max="3" min="1" onInput="$('#nftToMintNumber').html($(this).val())"
-                        type="range">
-                </div>
+            <div class="accordion-content">
+                <p>These days, the Mint Date have been fixed for the 20 December</p>
             </div>
-
-            <div class="row justify-content-center">
-                <button class="btn btn-primary w-25 p-3" id="nftClaim" onclick="mintNfts(document.getElementById('nftRange').value)"
-                        type="button">Claim
-                </button>
+          </div>
+        </div>
+        <div class="accordion-section">
+           <div class="accordion-body">
+            <div class="accordion-label">
+                <h4>When and where I will be able to see my NFT ?<h4>
             </div>
+            <div class="accordion-content">
+                <p>The reveal for the final look of your NFT have been fixed for the 24 December Midnight ! You will be able to see your Nft on the opensea link  just here : <br><a href="" target="blank">Lien Opensea</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-section">
+           <div class="accordion-body">
+            <div class="accordion-label">
+                <h4>How many FonkyBats will there be available?<h4>
+            </div>
+            <div class="accordion-content">
+                <p>9997 generative, 1 Golden One and 1 Hidden Easter Egg.</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-section">
+           <div class="accordion-body">
+            <div class="accordion-label">
+                <h4>How many Layers for Hom Many Properties ?<h4>
+            </div>
+            <div class="accordion-content">
+                <p>More than 350 Different Layers dispatch in 12 Properties</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-section">
+           <div class="accordion-body">
+            <div class="accordion-label">
+                <h4>When will I be able to mint a FonkyBat ?<h4>
+            </div>
+            <div class="accordion-content">
+                <p>22 December for a Reveal at Christmas Morning</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-section">
+           <div class="accordion-body">
+            <div class="accordion-label">
+                <h4>What blockchain will you be using ?<h4>
+            </div>
+            <div class="accordion-content">
+                <p>The Ethereum Blockchain.</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-section">
+           <div class="accordion-body">
+            <div class="accordion-label">
+                <h4>How much will it cost to mint one FonkyBat ?<h4>
+            </div>
+            <div class="accordion-content">
+                <p>0.09 ETH</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-section">
+           <div class="accordion-body">
+            <div class="accordion-label">
+                <h4>What are the secondary royalty fees ?<h4>
+            </div>
+            <div class="accordion-content">
+                <p>7 %</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-section">
+           <div class="accordion-body">
+            <div class="accordion-label">
+                <h4>Will there be giveaways ?<h4>
+            </div>
+            <div class="accordion-content">
+                <p>That's the point of that project: organizing some giveaways before the launch and then every 2 weeks during one year after the 100% reach: then we will send some real stuff to the NFT owners !</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-section">
+           <div class="accordion-body">
+            <div class="accordion-label">
+                <h4>there be a pre-sale ?<h4>
+            </div>
+            <div class="accordion-content">
+                <p>The 18 December : 400 winner will be able to mint 5 NFT Max !</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-section">
+           <div class="accordion-body">
+            <div class="accordion-label">
+                <h4>What drop structure do you have ?<h4>
+            </div>
+            <div class="accordion-content">
+                <p>There will be raffles to make it fair for everyone without high gas fees, additional information may be found.</p>
+            </div>
+          </div>
         </div>
     </div>
 
@@ -95,6 +202,7 @@
 
 <script crossorigin="anonymous" src="libs/jquery-3.6.0.js"></script>
 <script crossorigin="anonymous" src="libs/web3js/web3.min.js"></script>
-<script src="fonkybats.js" type="text/javascript"></script>
+<script src="javascript/fonkybats.js" type="text/javascript"></script>
+<script src="javascript/accordion.js" type="text/javascript"></script>
 
 </html>
