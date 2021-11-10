@@ -39,3 +39,14 @@ a:focus-visible {
 h1, h2, h3, h4, h5, p {
   margin: 0;
 } 
+
+/* container */
+.container {
+  background-image: url("../resources/bg-fonkybats.jpg");
+  background-repeat: repeat-y;
+  background-size: 100%;
+  margin: 0 auto;
+  max-width: 132rem;
+  padding-bottom: 12rem;
+  width: 100%;
+}
