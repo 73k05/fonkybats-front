@@ -1,0 +1,38 @@
+/* -------
+CTA components
+------- */ 
+
+.cta {
+  align-items: center;
+  background-image: url("../../resources/cta-bg.jpg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  height: 43rem;
+  padding: 9rem 2rem 3rem;
+  width: 100%;
+}
+
+.cta-title {
+  color: var(--white);
+  font-family: var(--ubuntu);
+  font-size: 3.8rem;
+  font-weight: var(--bold);
+  line-height: 1;
+}
+
+.cta-buttons {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.cta-divider {
+  color: var(--grayD4);
+  font-size: 1.8rem;
+  line-height: 1;
+  padding: 0 1.6rem;
+}

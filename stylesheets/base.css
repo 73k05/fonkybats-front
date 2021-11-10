@@ -8,5 +8,7 @@ Base stylesheets for FonkyBats
 @import "./_reset.css";
 
 /* components */
+@import "./components/_button.css";
+@import "./components/_cta.css";
 @import "./components/_footer.css";
 @import "./components/_header.css";
