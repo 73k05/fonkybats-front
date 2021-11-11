@@ -1,0 +1,70 @@
+/* -------
+roadmap components
+------- */
+
+.team {
+  margin: 0 auto;
+  max-width: 96rem;
+  padding: 12rem 0;
+  width: 100%;
+}
+
+/* title */
+.team-title {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  max-width: 29rem;
+  margin: 0 auto 9rem;
+}
+
+/* section */
+.team-section {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+.team-section:last-child{
+  margin-bottom: 0;
+}
+
+.team-aside {
+  flex: 0 0 auto;
+  margin-right: 6rem;
+}
+
+.team-aside > img {
+  border-radius: 0.2rem;
+  border: 0.3rem solid var(--color-secondary);
+  box-shadow: 0 1rem 4rem #1EC1B34D;
+  height: 20rem;
+  object-fit: cover;
+  width: 30rem;
+}
+
+/* content */
+.team-content {
+  flex: 1;
+}
+
+.team-content h3 {
+  color: var(--white);
+  font-family: var(--ubuntu);
+  font-size: 3.2rem;
+  font-weight: var(--bold);
+  line-height: 1;
+  margin-bottom: 1.4rem;
+  text-transform: uppercase;
+}
+
+.team-content h4 {
+  color: var(--color-orange);
+  font-family: var(--roboto);
+  font-size: 1.8rem;
+  font-weight: var(--medium);
+  line-height: 1;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+

@@ -4,8 +4,8 @@ roadmap components
 
 .roadmap {
   margin: 0 auto;
-  max-width: 100rem;
-  padding: 12rem 2rem;
+  max-width: 96rem;
+  padding: 12rem 0;
   width: 100%;
 }
 
