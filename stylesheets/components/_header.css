@@ -3,5 +3,148 @@ header components
 ------- */ 
 
 .header {
-  height: 100vh;
+  background-image: url("../../resources/header-bg.jpg");
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 90vh;
+  position: relative;
+  width: 100%;
+}
+.header:after {
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 35%,rgba(0,0,0,0.02) 36%,rgba(0,0,0,1) 100%);
+  bottom: 0;
+  content:'';
+  display: block;
+  height: 8rem;
+  left: 0;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+}
+
+/* topbar */
+.header-top {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem 4.4rem;
+}
+
+.header-social {
+  align-items: center;
+  display: flex;
+  justify-content: end;
+  list-style-type: none ;
+  margin: 0;
+  padding: 0;
+}
+
+.header-social > li {
+  margin-left: 3rem;
+}
+
+/* content */
+.header-logo {
+  display: block;
+  margin: 8rem auto 1rem;
+  object-fit: cover;
+  width: 75rem;
+}
+
+.header-connect {
+  margin: 0 auto;
+}
+
+/* form */
+.header-form {
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--gray44);
+  border-radius: 0.8rem;
+  padding: 2rem 3rem;
+  margin: 0 auto;
+  display: flex;
+  max-width: 56rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-form-label span:first-child {
+  color: var(--grayD4);
+  font-size: 1.6rem;
+  font-weight: var(--regular);
+}
+
+.header-form-label span:last-child {
+  color: var(--white);
+  font-size: 2rem;
+  font-weight: var(--regular);
+}
+
+.header-form-range {
+  margin-top: 2rem;
+  -webkit-appearance: none;  
+  background-color: var(--grayD4);
+  border-radius: 0.3rem;
+  height: 0.8rem;
+  overflow: visible;
+  position: relative;
+  width: 20rem;
+}
+
+.header-form-range::-webkit-slider-thumb {  
+  -webkit-appearance: none;  
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 1.6rem var(--color-primary);
+  height: 2rem;
+  position: relative;
+  width: 2rem;  
+  z-index: 100;
+} 
+
+/* scroll */
+.header-scroll {
+  bottom: 4rem;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+.header-scroll-content {
+  background: transparent;
+  border-radius: 6rem;
+  border: 0.3rem solid var(--white);
+  height: 4rem;
+  left: calc(50% - 1rem);
+  position: relative;
+  width: 2rem;
+  z-index: 1;
+}
+
+.header-scroll-circle {
+  animation: circle 2.5s ease-in-out infinite alternate;
+  background: var(--white);
+  border-radius: 50%;
+  height: 1rem;
+  inset: 0;
+  margin: auto;
+  position: absolute;
+  width: 1rem;
+}
+
+.header-scroll-text {
+  color: var(--white);
+  display: block;
+  margin-top: 1.6rem;
+  text-align: center ;
+}
+
+@keyframes circle {
+  0% {
+    transform: translateY(-1rem);
+  }
+  100% {
+    transform: translateY(1rem);
+  }
 }

@@ -54,7 +54,7 @@ p > span {
   background-image: url("../resources/bg-fonkybats.jpg");
   background-repeat: repeat-y;
   background-size: 100%;
-  margin: 0 auto;
+  margin: 6rem auto 0;
   max-width: 132rem;
   padding: 0 2rem 12rem;
   width: 100%;

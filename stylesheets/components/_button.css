@@ -54,3 +54,16 @@ Buttons components
   position: relative;
   z-index: 3;
 }
+
+/* modifiers */
+.btn.btn-secondary {
+  padding: 1.3rem 2.4rem;
+}
+
+.btn.btn-secondary:after {
+  background: linear-gradient(90deg, #838585 50%, #000 70%);
+}
+
+.btn.btn-secondary > span {
+  font-size: 1.6rem;
+}

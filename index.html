@@ -21,27 +21,38 @@
 <body>
     <header class="header">
         <div class="header-top">
-            <button class="btn-seondary">View on Opensea</button>
+            <a href="" class="btn btn-secondary"><span>View on Opensea</span></a>
             <ul class="header-social">
-                <li><a href="#" target="_blank" title="fonkybats discord">discord</a></li>
-                <li><a href="#" target="_blank" title="fonkybats discord">opensea</a></li>
-                <li><a href="#" target="_blank" title="fonkybats discord">twitter</a></li>
+                <li><a href="#" target="_blank"><img src="resources/icon-discord.png" alt="FonkyBats discord"></a></li>
+                <li><a href="#" target="_blank"><img src="resources/icon-opensea.png" alt="FonkyBats opensea"></a></li>
+                <li><a href="#" target="_blank"><img src="resources/icon-twitter.png" alt="FonkyBats twitter"></a></li>
             </ul>
         </div>
 
-        <div class="row justify-content-center">
-            <label for="nftRange">Number Of NFTs to Mint: </label> <span id="nftToMintNumber">2</span>
-            <div class="range">
-                <input class="form-range w-25 p-3" id="nftRange" max="3" min="1" onInput="$('#nftToMintNumber').html($(this).val())"
-                    type="range">
+        <div class="header-content">
+            <img class="header-logo" src="resources/logo-fonkybats.png" alt="Welcome to fonkyBats">
+            <button class="btn header-connect"><span>Connect Wallet</span></button>
+
+            <div class="header-form">
+                <div class="header-form-content">
+                    <div class="header-form-label">
+                        <span>Number Of NFTs to Mint :</span>
+                        <span id="nftToMintNumber">2</span>
+                    </div>
+                    <input class="header-form-range" id="nftRange" max="3" min="1" onInput="$('#nftToMintNumber').html($(this).val())"type="range">
+                </div>
+                <button href="" class="btn id="nftClaim" onclick="mintNfts(document.getElementById('nftRange').value)" type="button"><span>Claim FonkyBats</span></button>
             </div>
+
         </div>
 
-        <div class="row justify-content-center">
-            <button class="btn btn-primary w-25 p-3" id="nftClaim" onclick="mintNfts(document.getElementById('nftRange').value)"
-                    type="button">Claim
-            </button>
+        <div class="header-scroll">
+            <div class="header-scroll-content">
+                <div class="header-scroll-circle"></div>
+            </div>
+            <div class="header-scroll-text">Scroll down</div>
         </div>
+
     </header>
 
     <!-- start block container -->
@@ -101,7 +112,7 @@
                         <li>- printed on MUSEUM DIBOND MOUNTING</li> 
                         <li>- hand-numbered in gold pencil</li> 
                         <li>- signed by the artist - includes Certificate of Authenticity</li> 
-                        <li>- value 1289 usd / each</li>
+                        <li>- value 2289 usd / each</li>
                     </ul>
                 </div>
             </div>
@@ -142,7 +153,7 @@
                             <li>- depth: 9 » (22.9 cm)</li> 
                             <li>- weight: 12 lbs (5.4 kg)</li> 
                             <li>- material : Fabric / Polyresin</li> 
-                            <li>- value : Respectivly 2000 usd and 1200 usd</li>
+                            <li>- value 2889 usd</li>
                         </ul>
                     </div>
                     <div class="roadmap-content-right">
@@ -159,7 +170,7 @@
                 <div class="roadmap-content">
                     <h4>Step 5</h4>
                     <p>We’ll organise <span>the next 5 Giveaways</span> and will send the next 5 Art Prints signed and numbered by the artist himself.</p>
-                    <p>After the reveal, <span>the first owner who will find and contact us with the easter egg in hands will win a 20ETH price and a 2 weeks trip</span> (including Plane and 4* Hotel) and get the opportunity to meet the artist himself !</p>
+                    <p>After the reveal, <span>the first owner who will find and contact us with the easter egg in hands will win the 20ETH price !</span></p>
                 </div>
             </div>
             <div class="roadmap-step">
@@ -174,7 +185,7 @@
                     <p>Then what will Happen ? <br> During the next year to come,<span>the 2 next steps are already waiting to be launched</span> …</p>
                     <ul style="margin-bottom: 2rem;">
                         <li>- Serie Phase II of the FonkyBats Family</li> 
-                        <li>- Special Ones Series Finaly</li> 
+                        <li>- Special Ones Series</li> 
                     </ul>
                     <p>Finaly, <span>the future of the project is in your hands !</span></p>
                 </div>
@@ -349,7 +360,7 @@
         <div class="cta-buttons">
             <a href="#" class="btn"><span>Join our discord</span></a>
             <span class="cta-divider">Or</span>
-            <a class="btn"><span>Connect Wallet</span></a>
+            <button class="btn"><span>Connect Wallet</span></button>
         </div>
     </div>
 
