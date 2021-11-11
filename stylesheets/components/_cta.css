@@ -5,7 +5,7 @@ CTA components
 .cta {
   align-items: center;
   background-image: url("../../resources/cta-bg.jpg");
-  background-position: 50% 50%;
+  background-position: 50% 100%;
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;

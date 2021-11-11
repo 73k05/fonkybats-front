@@ -1,0 +1,125 @@
+/* -------
+roadmap components
+------- */
+
+.roadmap {
+  margin: 0 auto;
+  max-width: 100rem;
+  padding: 12rem 2rem;
+  width: 100%;
+}
+
+/* heading */
+.roadmap-heading {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4.6rem;
+}
+
+.roadmap-title {
+  margin-bottom: 3rem;
+  max-width: 26rem;
+}
+
+.roadmap-subtitle {
+  max-width: 45rem;
+  text-align: center;
+}
+
+/* step */
+.roadmap-step {
+  align-items: flex-start;
+  border-bottom: 1px solid var(--gray44);
+  display: flex;
+  justify-content: space-between;
+  padding: 4.4rem 0;
+}
+.roadmap-step:last-child {
+  border: none;
+}
+
+.roadmap-counter {
+  align-items: center;
+  border: 1px solid var(--grayAA);
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  height: 13rem;
+  justify-content: center;
+  width: 15rem;
+}
+
+.roadmap-counter-heading {
+  color: var(--color-primary);
+  font-family: var(--ubuntu);
+  font-size: 2.4rem;
+  font-weight: var(--bold);
+}
+
+.roadmap-counter-text {
+  color: var(--color-primary);
+  font-family: var(--ubuntu);
+  font-size: 1.8rem;
+  font-weight: var(--medium);
+}
+
+.roadmap-counter-text > span {
+  font-size: 3.8rem;
+  font-weight: var(--bold);
+  letter-spacing: -.252rem;
+  padding-right: .3rem;
+}
+
+.roadmap-content {
+  flex: 1;
+  margin-left: 5rem;
+}
+
+.roadmap-content h4 {
+  color: var(--white);
+  font-size: 2.4rem;
+  font-weight: var(--medium);
+  line-height: 1;
+  padding: 2rem 0 1.2rem;
+}
+
+.roadmap-content p {
+  margin-bottom: 2rem;
+}
+
+.roadmap-content ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.roadmap-content li {
+  font-size: 1.8rem;
+  padding: .3rem 0;
+}
+
+/* step with single image */
+.roadmap-content.with-single-image {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+}
+
+.roadamp-content-left {
+  flex: 1;
+}
+
+.roadmap-content-right {
+  flex: 0 0 auto;
+  margin-left: 8rem;
+}
+
+.roadmap-content-right > img {
+  border-radius: 0.2rem;
+  border: 0.3rem solid var(--color-secondary);
+  box-shadow: 0 1rem 4rem #1EC1B34D;
+  height: 36rem;
+  object-fit: cover;
+  width: 24rem;
+}
