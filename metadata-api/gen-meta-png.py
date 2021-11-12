@@ -22,6 +22,7 @@ FIRST_NAMES = ['Herbie', 'Sprinkles', 'Boris', 'Dave', 'Randy', 'Captain']
 LAST_NAMES = ['Starbelly', 'Fisherton', 'McCoy']
 
 BASES = ['jellyfish', 'starfish', 'crab', 'narwhal', 'tealfish', 'goldfish']
+CASK = ['Mike Tyson', 'Vercingetorix']
 EYES = ['big', 'joy', 'wink', 'sleepy', 'content']
 MOUTH = ['happy', 'surprised', 'pleased', 'cute']
 

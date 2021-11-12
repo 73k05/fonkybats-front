@@ -1,0 +1,47 @@
+{
+  "attributes": [
+    {
+      "trait_type": "base",
+      "value": "super"
+    },
+    {
+      "trait_type": "eyes",
+      "value": "cyclop"
+    },
+    {
+      "trait_type": "mouth",
+      "value": "unhappy"
+    },
+    {
+      "trait_type": "level",
+      "value": 2
+    },
+    {
+      "trait_type": "stamina",
+      "value": 2.3
+    },
+    {
+      "trait_type": "personality",
+      "value": "sad"
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "aqua_power",
+      "value": 40
+    },
+    {
+      "display_type": "boost_percentage",
+      "trait_type": "stamina_increase",
+      "value": 10
+    },
+    {
+      "display_type": "number",
+      "trait_type": "generation",
+      "value": 2
+    }
+  ],
+  "description": "Friendly FonkyBat that can connect everything.",
+  "external_url": "https://example.com/?token_id=1",
+  "image": "https://fonkybats.com/metadata-api/1.png",
+  "name": "Super Bat"
+}

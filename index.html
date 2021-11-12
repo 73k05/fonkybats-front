@@ -32,17 +32,64 @@
         </div>
 
         <div class="row justify-content-center">
-            <label for="nftRange">Number Of NFTs to Mint: </label> <span id="nftToMintNumber">2</span>
-            <div class="range">
-                <input class="form-range w-25 p-3" id="nftRange" max="3" min="1" onInput="$('#nftToMintNumber').html($(this).val())"
-                       type="range">
+            <div class="col">
+                <label for="nftRange">Number Of NFTs to Mint: </label> <span id="nftToMintNumber">2</span>
             </div>
+            <div class="col">
+                <div class="range">
+                    <input class="form-range w-25" id="nftRange" max="3" min="1"
+                           onInput="$('#nftToMintNumber').html($(this).val())"
+                           type="range">
+                </div>
+            </div>
+            <div class="col">
+                <label for="contractSaleState">Contract Sale State: </label> <span id="contractSaleState"></span>
+            </div>
+
         </div>
 
-        <div class="row justify-content-center">
-            <button class="btn btn-primary w-25 p-3" id="nftClaim" onclick="mintNfts(document.getElementById('nftRange').value)"
-                    type="button">Claim
-            </button>
+
+        <div class="row">
+            <div class="col-2">
+                <!-- Mint Tokens -->
+                <div class="row justify-content-center">
+                    <button class="btn btn-dark" id="nftPreSaleMintButton" hidden="true"
+                            onclick="preOrderMintNfts(document.getElementById('nftRange').value)"
+                            type="button">Mint PreSale
+                    </button>
+                    <button class="btn btn-dark" id="nftSaleMintButton" hidden="true"
+                            onclick="mintNfts(document.getElementById('nftRange').value)"
+                            type="button">Mint MainSale
+                    </button>
+                </div>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-2">
+                <!-- Change SaleState to Inactive -->
+                <div class="row justify-content-center">
+                    <button class="btn btn-secondary" id="stateInactive" onclick="setStateInactive()"
+                            type="button">Inactive
+                    </button>
+                </div>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-2">
+                <!-- Change SaleState to PreOrder-->
+                <div class="row justify-content-center">
+                    <button class="btn btn-primary" id="statePreOrder" onclick="setStatePreOrder()"
+                            type="button">Go Presale
+                    </button>
+                </div>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-2">
+                <!-- Change SaleState to Sale -->
+                <div class="row justify-content-center">
+                    <button class="btn btn-success" id="stateMainSale" onclick="setStateMainSale()"
+                            type="button">Main Sale
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
