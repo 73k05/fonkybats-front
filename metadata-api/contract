@@ -1,0 +1,8 @@
+ {
+   "name": "Fonky Bat's NFTs",
+   "description": "Fonky Bats nice heroes that can be very nasty",
+   "image": "https://fonkybats.com//metadata-api/avatar.jpg",
+   "external_link": "https://fonkybats.com",
+   "seller_fee_basis_points": 100,
+   "fee_recipient": "0x9Ad99955f6938367F4A703c60a957B639D250a95"
+ }

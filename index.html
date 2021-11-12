@@ -37,15 +37,24 @@
             <img class="header-logo" src="resources/logo-fonkybats.png" alt="Welcome to fonkyBats">
             <button class="btn header-connect"><span>Connect Wallet</span></button>
 
+            <!-- Mint Tokens -->
             <div class="header-form">
                 <div class="header-form-content">
                     <div class="header-form-label">
                         <span>Number Of NFTs to Mint :</span>
                         <span id="nftToMintNumber">2</span>
                     </div>
-                    <input class="header-form-range" id="nftRange" max="3" min="1" onInput="$('#nftToMintNumber').html($(this).val())"type="range">
+                    <input class="header-form-range" id="nftRange" max="3" min="1" onInput="$('#nftToMintNumber').html($(this).val())" type="range">
                 </div>
-                <button href="" class="btn id="nftClaim" onclick="mintNfts(document.getElementById('nftRange').value)" type="button"><span>Claim FonkyBats</span></button>
+                <button href="" class="btn" id="nftPreSaleMintButton" onclick="mintNfts(document.getElementById('nftRange').value)" type="button" hidden="true"><span>Mint PreSale</span></button>
+                <button href="" class="btn" id="nftSaleMintButton" onclick="mintNfts(document.getElementById('nftRange').value)" type="button"><span>Mint MainSale</span></button>
+            </div>
+
+            <!-- Change Sale State (OnlyOwner) -->
+            <div class="header-form">
+                <button href="" class="btn" id="stateInactive" onclick="setStateInactive()" type="button" hidden="true"><span>Inactive</span></button>
+                <button href="" class="btn" id="statePreOrder" onclick="setStatePreOrder()" type="button" hidden="true"><span>Go Presale</span></button>
+                <button href="" class="btn" id="stateMainSale" onclick="setStateMainSale()" type="button" hidden="true"><span>Main Sale</span></button>
             </div>
 
         </div>
@@ -61,7 +70,7 @@
 
     <!-- start block container -->
     <div class="container">
-        
+
         <div class="about">
             <div class="about-intro">
                 <div class="about-content">
@@ -135,12 +144,12 @@
                     <h4>Step 2</h4>
                     <p>We’ll organise the 5 first Giveaways and <span>will send the 5 first Art Prints signed and numbered</span> by the artist himself :</p>
                     <ul>
-                        <li>- limited to only 1 copie corresponding to the NFT number</li> 
+                        <li>- limited to only 1 copie corresponding to the NFT number</li>
                         <li>- size 31 » x 31 » (80cm x 80 cm)</li>
                         <li>- printed on Fine Art Paper "HAHNEMUHLE BARYTE 325G"</li>
-                        <li>- mounted on MUSEUM DIBOND (aluminium)</li> 
-                        <li>- hand-numbered in gold pencil</li> 
-                        <li>- signed by the artist - includes Certificate of Authenticity</li> 
+                        <li>- mounted on MUSEUM DIBOND (aluminium)</li>
+                        <li>- hand-numbered in gold pencil</li>
+                        <li>- signed by the artist - includes Certificate of Authenticity</li>
                         <li>- value 2289 usd / each</li>
                     </ul>
                     <div class="roadmap-gallery roadmap-gallery-step2">
@@ -160,14 +169,14 @@
                     <h4>Step 3</h4>
                     <p>We’ll introduce the <span>1st Special One : The “Golden One”</span>. To celebrate the 50%, We’ll organise a GiveAway to know who will win <span>the Special Bat Art Print signed and numbered</span> by the artist himself :</p>
                     <ul>
-                        <li>- signed and numbered by the artist himself</li> 
-                        <li>- limited to only 10 copies in the world</li> 
-                        <li>- size 31 » x 47 » (80cm x 120 cm)</li> 
+                        <li>- signed and numbered by the artist himself</li>
+                        <li>- limited to only 10 copies in the world</li>
+                        <li>- size 31 » x 47 » (80cm x 120 cm)</li>
                         <li>- printed on Fine Art Paper "HAHNEMUHLE BARYTE 325G"</li>
-                        <li>- mounted on MUSEUM DIBOND (aluminium)</li> 
-                        <li>- hand-numbered in gold pencil</li> 
-                        <li>- signed by the artist</li> 
-                        <li>- includes Certificate of Authenticity</li> 
+                        <li>- mounted on MUSEUM DIBOND (aluminium)</li>
+                        <li>- hand-numbered in gold pencil</li>
+                        <li>- signed by the artist</li>
+                        <li>- includes Certificate of Authenticity</li>
                         <li>- value 3889 usd / each</li>
                     </ul>
                     <div class="roadmap-gallery roadmap-gallery-step3">
@@ -188,11 +197,11 @@
                         <h4>Step 4</h4>
                         <p>We’ll unveil <span>the winner of the « Golden One »</span> who will receve that <span>Special one Statue</span> !</p>
                         <ul>
-                            <li>- height: 25.75 » (65.4 cm)</li> 
-                            <li>- width: 9 » (22.9 cm)</li> 
-                            <li>- depth: 9 » (22.9 cm)</li> 
-                            <li>- weight: 12 lbs (5.4 kg)</li> 
-                            <li>- material : Fabric / Polyresin</li> 
+                            <li>- height: 25.75 » (65.4 cm)</li>
+                            <li>- width: 9 » (22.9 cm)</li>
+                            <li>- depth: 9 » (22.9 cm)</li>
+                            <li>- weight: 12 lbs (5.4 kg)</li>
+                            <li>- material : Fabric / Polyresin</li>
                             <li>- value 2889 usd</li>
                         </ul>
                     </div>
@@ -224,8 +233,8 @@
                     <h4>Step 6</h4>
                     <p>Then what will Happen ? <br> During the next year to come,<span>the 2 next steps are already waiting to be launched</span> …</p>
                     <ul style="margin-bottom: 2rem;">
-                        <li>- Serie Phase II of the FonkyBats Family</li> 
-                        <li>- Special Ones Series</li> 
+                        <li>- Serie Phase II of the FonkyBats Family</li>
+                        <li>- Special Ones Series</li>
                     </ul>
                     <p>Finaly, <span>the future of the project is in your hands !</span></p>
                 </div>
@@ -423,7 +432,7 @@
                 <span class="footer-copyright">@2021 FonkyBats. All right reserved.</span>
             </div>
         </div>
-        
+
     </footer>
 </body>
 
