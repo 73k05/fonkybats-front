@@ -23,6 +23,15 @@ header components
   z-index: 1;
 }
 
+/* modifiers */
+.header.is-waiting .header-top {
+  justify-content: flex-end;
+}
+
+.header.is-waiting .header-logo {
+  margin-top: 4rem;
+}
+
 /* topbar */
 .header-top {
   align-items: center;
@@ -147,4 +156,73 @@ header components
   100% {
     transform: translateY(1rem);
   }
+}
+
+/* countdown */
+.countdown {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 0.8rem;
+  border: 1px solid var(--gray44);
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 65rem;
+  padding: 3rem 4rem;
+  text-align: center;
+}
+
+.countdown-title {
+  color: var(--white);
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  font-family: var(--ubuntu);
+  font-weight: var(--medium);
+}
+
+.countdown-days {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+	margin: 1rem 0 0;
+  padding: 0 3rem;
+}
+
+.countdown-days li {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.countdown-numbers {
+	color: var(--white);
+  font-size: 3.2rem;
+  font-weight: var(--medium);
+} 
+
+.countdown-name {
+  color: var(--grayAA);
+	font-size: 1.8rem;
+	line-height: 1;
+  font-weight: var(--regular);
+}
+
+#countdown-progressBar {
+  background-color: var(--color-primary);
+  border-radius: 0.4rem;
+  height: 2.2rem;
+  margin: 1rem auto;
+  width: 100%;
+  transform: rotate(180deg);
+}
+
+#countdown-progressBar div {
+  background-color: var(--color-primary-lighten);
+  border-radius: 0.4rem;
+  box-sizing: border-box;
+  height: 100%;
+  line-height: 2.2rem;
+  padding: 0 1rem;
+  text-align: right;
+  width: 0;
 }
