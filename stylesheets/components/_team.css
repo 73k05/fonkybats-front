@@ -35,13 +35,18 @@ roadmap components
 }
 
 .team-aside > img {
-  border-radius: 0.2rem;
   border: 0.3rem solid var(--color-secondary);
+  border-radius: 0.2rem;
   box-shadow: 0 1rem 4rem #1EC1B34D;
   height: 20rem;
   object-fit: cover;
   width: 30rem;
 }
+
+.team-aside > img.team-aside-big {
+  height: 30rem;
+}
+
 
 /* content */
 .team-content {

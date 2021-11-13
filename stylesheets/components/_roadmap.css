@@ -99,6 +99,27 @@ roadmap components
   padding: .3rem 0;
 }
 
+/* roadmap gallery */
+.roadmap-gallery {
+  margin-top: 2rem;
+}
+
+.roadmap-gallery-item {
+  height: 30rem;
+  width: 33%;
+  margin: 1rem;
+}
+
+.roadmap-gallery-item > img {
+  border-radius: 0.2rem;
+  border: 0.3rem solid var(--color-secondary);
+  box-shadow: 0 1rem 4rem #1EC1B34D;
+  display: block;
+  margin: 0 auto;
+  max-height: 100%;
+  max-width: 100%;
+}
+
 /* step with single image */
 .roadmap-content.with-single-image {
   align-items: flex-start;
