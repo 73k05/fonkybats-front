@@ -24,8 +24,9 @@ header components
 }
 
 /* modifiers */
-.header.is-waiting .header-top {
-  justify-content: flex-end;
+.header.is-waiting .header-social {
+  flex: 1;
+  justify-self: flex-end;
 }
 
 .header.is-waiting .header-logo {
@@ -42,6 +43,23 @@ header components
   display: flex;
   justify-content: space-between;
   padding: 3rem 4.4rem;
+}
+
+.header-btn-wallet {
+  align-items: center;
+  display: flex;
+}
+.header-btn-wallet > i {
+  background-image: url('../../resources/ethereum.svg');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  height: 2.5rem;
+  margin-right: 1.2rem;
+  position: relative;
+  width: 2rem;
+  z-index: 3;
 }
 
 .header-social {
