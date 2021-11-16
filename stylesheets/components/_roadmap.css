@@ -27,6 +27,45 @@ roadmap components
   text-align: center;
 }
 
+/* sales */
+.roadmap-sales {
+  align-content: stretch;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto 3rem;
+  max-width: 65rem;
+}
+
+.roadmap-sales-item {
+  border: 0.2rem solid var(--grayD4);
+  border-right: none;
+  flex: 1;
+  padding: 1.5rem 0;
+}
+.roadmap-sales-item:last-child {
+  border-right: 0.2rem solid var(--grayD4);
+}
+
+.roadmap-sales-item-head {
+  border-bottom: 0.2rem solid var(--grayD4);
+  padding: 0 1.5rem 1.5rem;
+}
+
+.roadmap-sales-item-head > span {
+  color: var(--white);
+  display: block;
+  font-size: 2.2rem;
+  font-weight: var(--medium);
+  line-height: 1;
+  margin-bottom: .5rem;
+}
+
+.roadmap-sales-item > p {
+  color: var(--color-orange);
+  font-size: 1.8rem;
+  padding: 1.5rem 1.5rem 0;
+}
+
 /* step */
 .roadmap-step {
   align-items: flex-start;
@@ -181,6 +220,10 @@ responsive
 }
 
 @media (max-width: 680px) {
+  .roadmap-step {
+    padding: 3rem 0;
+  }
+  
   .roadmap-gallery {
     left: 50%;
     margin-left: -50vw;
@@ -192,5 +235,16 @@ responsive
 
   .roadmap-gallery-item {
     width: 80%;
+  }
+
+  /* sales */
+  .roadmap-sales {
+    flex-direction: column;
+    margin: 2rem 0 0;
+  }
+
+  .roadmap-sales-item {
+    border-right: 0.2rem solid var(--grayD4);
+    margin-bottom: 2rem;
   }
 }
