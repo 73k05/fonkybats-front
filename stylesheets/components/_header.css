@@ -30,7 +30,7 @@ header components
 }
 
 .header.is-waiting .header-logo {
-  margin-top: 2rem;
+  margin-top: 8rem;
 }
 
 .header.is-waiting .header-scroll {
@@ -248,4 +248,72 @@ header components
   padding: 0 1rem;
   text-align: right;
   width: 0;
+}
+
+/* -------
+responsive
+------- */ 
+@media (max-width: 1024px) {
+  .header {
+    height: 100vh;
+  }
+
+  .header-top {
+    padding: 3rem;
+  }
+
+  .header.is-waiting .header-logo,
+  .header-logo {
+    margin: 0;
+    width: 100%;
+  }
+
+  .header-content {
+    top: 50%;
+    transform: translate(0, -50%);
+    position: absolute;
+    left: 3rem;
+    right: 3rem;
+  }
+}
+
+@media (max-width: 680px) {
+
+  .header-top {
+    flex-direction: column-reverse;
+    padding: 2rem 3rem;
+  }
+
+  .header-social {
+    margin-bottom: 2rem;
+  }
+
+  .header-social > li:first-child {
+    margin: 0;
+  }
+
+  .header-form {
+    flex-direction: column;
+  }
+
+  .header-form-content {
+    margin-bottom: 2rem;
+  }
+
+  .countdown {
+    padding: 2rem;
+  }
+
+  .countdown-days {
+    padding: 0;
+  }
+
+  .countdown-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .header.is-waiting .header-scroll {
+    bottom: 2rem;
+  }
 }

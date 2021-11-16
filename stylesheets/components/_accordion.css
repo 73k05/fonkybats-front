@@ -79,3 +79,29 @@ Accordion components
 .accordion-content > p {
   margin: 0;
 }
+
+/* -------
+responsive
+------- */ 
+@media (max-width: 1024px) {
+  .accordion {
+    padding: 6rem 3rem;
+  }
+
+  .accordion-title {
+    margin-bottom: 5rem;
+  }
+
+  .accordion-title > h3 {
+    font-size: 3.2rem;
+  }
+
+  .accordion-label > h4 {
+    padding-right: 3rem;
+    line-height: 1.3;
+  }
+
+  .accordion-body.active .accordion-content {
+    height: 20rem;
+  }
+}

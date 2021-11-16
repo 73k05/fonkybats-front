@@ -144,3 +144,53 @@ roadmap components
   object-fit: cover;
   width: 24rem;
 }
+
+/* -------
+responsive
+------- */ 
+@media (max-width: 1024px) {
+  .roadmap {
+    padding: 7rem 0 2rem;
+  }
+
+  .roadmap-heading {
+    margin-bottom: 1rem;
+  }
+
+  .roadmap-title {
+    max-width: 100%;
+  }
+
+  .roadmap-subtitle > br {
+    display: none;
+  }
+
+  .roadmap-step,
+  .roadmap-content.with-single-image {
+    flex-direction: column;
+  }
+
+  .roadmap-content {
+    margin: 2rem 0 0;
+  }
+
+  .roadmap-content-right {
+    margin: 3rem 0 0;
+    flex: 1;
+  }
+}
+
+@media (max-width: 680px) {
+  .roadmap-gallery {
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    position: relative;
+    right: 50%;
+    width: 100vw;
+  }
+
+  .roadmap-gallery-item {
+    width: 80%;
+  }
+}

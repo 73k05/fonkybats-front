@@ -1,5 +1,0 @@
-@custom-media --small (width <= 680px);
-@custom-media --medium-and-up (width > 680px);
-@custom-media --large-and-down (width <= 960px);
-@custom-media --large-and-up (width > 960px);
-@custom-media --xlarge-and-up (width > 1300px);

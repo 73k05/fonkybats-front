@@ -73,3 +73,25 @@ roadmap components
   text-transform: uppercase;
 }
 
+/* -------
+responsive
+------- */ 
+@media (max-width: 1024px) {
+  .team {
+    padding: 6rem 0;
+  }
+
+  .team-title {
+    margin-bottom: 4rem;
+    max-width: 100%;
+  }
+  
+  .team-aside {
+    display: none;
+  }
+
+  .team-section {
+    margin-bottom: 5rem;
+  }
+}
+

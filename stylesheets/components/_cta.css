@@ -21,6 +21,7 @@ CTA components
   font-size: 3.8rem;
   font-weight: var(--bold);
   line-height: 1;
+  text-align: center;
 }
 
 .cta-buttons {
@@ -35,4 +36,17 @@ CTA components
   font-size: 1.8rem;
   line-height: 1;
   padding: 0 1.6rem;
+}
+
+/* -------
+responsive
+------- */ 
+@media (max-width: 680px) {
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .cta-divider {
+    padding: 2rem;
+  }
 }

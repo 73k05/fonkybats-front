@@ -2,6 +2,8 @@
 Accordion components
 ------- */ 
 
+@import "../_media_queries.css";
+
 .about {
   padding: 10rem 0 12rem;
 }
@@ -100,4 +102,64 @@ Accordion components
   height: 30rem;
   object-fit: cover;
   width: 30rem;
+}
+
+/* -------
+responsive
+------- */ 
+@media (max-width: 1024px) {
+  .about {
+    padding: 5rem 0 6rem;
+  }
+  
+  .about-aside {
+    display: none;
+  }
+
+  .about-content > p {
+   max-width: 100%;
+  }
+
+  .about-helmet-items > li {
+    flex: 1;
+  }
+
+  .about-helmet-item {
+    height: auto;
+    max-width: 30rem;
+    width: 100%;
+  }
+}
+
+@media (max-width: 680px) {
+  .about-title {
+    max-width: 100%;
+  }
+
+  .about-helmet {
+    margin-top: 6rem;
+  }
+
+  .about-subtitle {
+    font-size: 2.6rem;
+    line-height: 3.6rem;
+  }
+
+  .about-subtitle > br {
+    display: none;
+  }
+  
+  .about-helmet-items {
+    flex-direction: column;
+  }
+
+  .about-helmet-items > li {
+    padding: 1.5rem 2rem;
+  }
+
+  .about-helmet-item {
+    height: auto;
+    max-width: 100%;
+    width: 100%;
+  }
 }
