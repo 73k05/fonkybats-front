@@ -67,3 +67,7 @@ Buttons components
 .btn.btn-secondary > span {
   font-size: 1.6rem;
 }
+
+.btn.hide{
+  display: none;
+}

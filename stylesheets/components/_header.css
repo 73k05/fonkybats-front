@@ -317,3 +317,7 @@ responsive
     bottom: 2rem;
   }
 }
+
+.header-form.hide{
+  display: none;
+}
