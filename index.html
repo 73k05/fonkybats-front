@@ -14,433 +14,522 @@
     <meta content="Mint Fonky NFTs" name="og:description">
     <meta content="1634558495" name="og:updated_time">
 
-    <link rel="stylesheet" href="https://use.typekit.net/vqc4ldw.css">
+    <link href="libs/css/vqc4ldw.css" rel="stylesheet">
     <link href="stylesheets/base.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link href="libs/css/flickity.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <header class="header">
-        <div class="header-top">
-            <div>
-                <a href="" class="btn btn-secondary"><span>View on Opensea</span></a>
-                <button class="btn header-btn-wallet"><i></i><span>0xC3e7...5EC1</span></button>
+
+<header class="header hide" id="headerSale">
+    <div class="header-top">
+        <div>
+            <a class="btn btn-secondary hide" href="https://testnets.opensea.io/collection/fonkybats-v4"
+               target="_blank"><span>View on Opensea</span></a>
+            <button class="btn header-btn-wallet hide" id="walletAddressLabel"><span id="walletAddressSpan">0xC3e7...5EC1</span>
+            </button>
+        </div>
+        <ul class="header-social">
+            <li><a href="https://discord.gg/JtjWgcV2" target="_blank"><img alt="FonkyBats discord"
+                                                                           src="resources/icon-discord.png"></a></li>
+            <li><a href="https://testnets.opensea.io/collection/fonkybats-v4" target="_blank"><img
+                    alt="FonkyBats opensea" src="resources/icon-opensea.png"></a></li>
+            <li><a href="https://twitter.com/FonkyBats" target="_blank"><img alt="FonkyBats twitter"
+                                                                             src="resources/icon-twitter.png"></a></li>
+        </ul>
+    </div>
+
+    <div class="header-content">
+        <img alt="Welcome to fonkyBats" class="header-logo" src="resources/logo-fonkybats.png">
+        <button class="btn header-connect" id="walletConnectButton" onclick="connectWallet()">
+            <span>Connect Wallet</span></button>
+
+        <!-- Mint Tokens -->
+        <div class="header-form hide" id="nftMintDiv">
+            <div class="header-form-content">
+                <div class="header-form-label">
+                    <span>Number Of NFTs to Mint :</span>
+                    <span id="nftToMintNumber">2</span>
+                </div>
+                <input class="header-form-range" id="nftRange" max="3" min="1"
+                       onInput="$('#nftToMintNumber').html($(this).val())" type="range">
             </div>
-            <ul class="header-social">
-                <li><a href="#" target="_blank"><img src="resources/icon-discord.png" alt="FonkyBats discord"></a></li>
-                <li><a href="#" target="_blank"><img src="resources/icon-opensea.png" alt="FonkyBats opensea"></a></li>
-                <li><a href="#" target="_blank"><img src="resources/icon-twitter.png" alt="FonkyBats twitter"></a></li>
+            <button class="btn hide" href="" id="nftPreSaleMintButton"
+                    onclick="preOrderMintNfts(document.getElementById('nftRange').value)" type="button"><span>Mint PreSale</span>
+            </button>
+            <button class="btn hide" href="" id="nftSaleMintButton"
+                    onclick="mintNfts(document.getElementById('nftRange').value)" type="button">
+                <span>Mint MainSale</span></button>
+        </div>
+
+        <!-- Change Sale State (OnlyOwner) -->
+        <div class="header-form hide">
+            <button class="btn" href="" id="stateInactive" onclick="setStateInactive()" type="button">
+                <span>Inactive</span></button>
+            <button class="btn" href="" id="statePreOrder" onclick="setStatePreOrder()" type="button">
+                <span>Go Presale</span></button>
+            <button class="btn" href="" id="stateMainSale" onclick="setStateMainSale()" type="button">
+                <span>Main Sale</span></button>
+        </div>
+    </div>
+
+    <div class="header-scroll">
+        <div class="header-scroll-content">
+            <div class="header-scroll-circle"></div>
+        </div>
+        <div class="header-scroll-text">Scroll down</div>
+    </div>
+
+</header>
+
+<header class="header is-waiting" id="headerLoading">
+    <div class="header-top">
+        <ul class="header-social">
+            <li><a href="https://discord.gg/JtjWgcV2" target="_blank"><img src="resources/icon-discord.png" alt="FonkyBats discord"></a></li>
+            <li><a href="https://twitter.com/FonkyBats" target="_blank"><img src="resources/icon-twitter.png" alt="FonkyBats twitter"></a></li>
+        </ul>
+    </div>
+    <div class="header-content">
+        <img class="header-logo" src="resources/logo-fonkybats.png" alt="Welcome to fonkyBats">
+        <button class="btn header-connect" id="walletConnectLoadingButton" onclick="connectWallet()">
+            <span>Connect Wallet</span></button>
+
+        <div class="countdown">
+            <H2 class="countdown-title">FonkyBats are loading ...</h2>
+
+            <div id="countdown-progressBar">
+                <div></div>
+            </div>
+
+            <span>The main sale will be available in</span>
+            <ul class="countdown-days" id="countdown">
+                <li>
+                    <span id="day" class="countdown-numbers">00</span>
+                    <p class="countdown-name">days</p>
+                </li>
+                <li>
+                    <span id="hour" class="countdown-numbers">00</span>
+                    <p class="countdown-name">hours</p>
+                </li>
+                <li>
+                    <span id="minute" class="countdown-numbers">00</span>
+                    <p class="countdown-name">minutes</p>
+                </li>
+                <li>
+                    <span id="second" class="countdown-numbers">00</span>
+                    <p class="countdown-name">seconds</p>
+                </li>
             </ul>
         </div>
-
-        <div class="header-content">
-            <img class="header-logo" src="resources/logo-fonkybats.png" alt="Welcome to fonkyBats">
-            <button class="btn header-connect"><span>Connect Wallet</span></button>
-
-            <!-- Mint Tokens -->
-            <div class="header-form">
-                <div class="header-form-content">
-                    <div class="header-form-label">
-                        <span>Number Of NFTs to Mint :</span>
-                        <span id="nftToMintNumber">2</span>
-                    </div>
-                    <input class="header-form-range" id="nftRange" max="3" min="1" onInput="$('#nftToMintNumber').html($(this).val())" type="range">
-                </div>
-                <button href="" class="btn hide" id="nftPreSaleMintButton" onclick="mintNfts(document.getElementById('nftRange').value)" type="button"><span>Mint PreSale</span></button>
-                <button href="" class="btn" id="nftSaleMintButton" onclick="mintNfts(document.getElementById('nftRange').value)" type="button"><span>Mint MainSale</span></button>
-            </div>
-
-            <!-- Change Sale State (OnlyOwner) -->
-            <div class="header-form hide">
-                <button href="" class="btn" id="stateInactive" onclick="setStateInactive()" type="button"><span>Inactive</span></button>
-                <button href="" class="btn" id="statePreOrder" onclick="setStatePreOrder()" type="button"><span>Go Presale</span></button>
-                <button href="" class="btn" id="stateMainSale" onclick="setStateMainSale()" type="button"><span>Main Sale</span></button>
-            </div>
-
-        </div>
-
-        <div class="header-scroll">
-            <div class="header-scroll-content">
-                <div class="header-scroll-circle"></div>
-            </div>
-            <div class="header-scroll-text">Scroll down</div>
-        </div>
-
-    </header>
-
-    <!-- start block container -->
-    <div class="container">
-
-        <div class="about">
-            <div class="about-intro">
-                <div class="about-content">
-                    <div class="about-heading">About</div>
-                    <img class="about-title" src="resources/9999-unique-Fonkybats.png" alt="9,999 unique FonkyBats">
-                    <p><span>FonkyBats</span> is a personal and artistic project directed by an artist rich of a 20 years experience in creative artwork and art business : here is <span>FonkyBats !</span></p>
-                    <p>Freddy Miet started to work on that project with the central idea to bring old art to new art, <span>mixing masterpieces and history of art inside the NFT’s through a playful way for the young generations.</span> the artist second idea have been to play with codes of Generative Art to create something totaly original and unique.</p>
-                </div>
-                <div class="about-aside">
-                    <img class="about-gallery" src="resources/fonkyBats-about.gif" alt="gallery FonbkyBats NFT">
-                </div>
-            </div>
-            <div class="about-helmet">
-                <div class="about-subtitle">Some rares, super rares and<br> Legendary Helmets</div>
-                <ul class="about-helmet-items">
-                    <li><img class="about-helmet-item" src="resources/helmet-1.jpg" alt="helmet legendaire"></li>
-                    <li><img class="about-helmet-item" src="resources/helmet-2.jpg" alt="helmet legendaire"></li>
-                    <li><img class="about-helmet-item" src="resources/helmet-3.jpg" alt="helmet legendaire"></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="roadmap">
-            <div class="roadmap-heading">
-                <img class="roadmap-title" src="resources/roadmap.png" alt="FonkyBats roadmap">
-                <p class="roadmap-subtitle">FonykBats will launch on <span>20 December 2021</span>.<br>Collect your favorite Bat and join our family.</p>
-            </div>
-
-            <div class=roadmap-sales>
-                <div class="roadmap-sales-item">
-                    <div class="roadmap-sales-item-head">
-                        <span>Pre Sale</span>
-                        <div>17 december</div>
-                    </div>
-                    <p>0,07 ETH</p>
-                </div>
-                <div class="roadmap-sales-item">
-                    <div class="roadmap-sales-item-head">
-                        <span>Main sale</span>
-                        <div>20 december</div>
-                    </div>
-                    <p>0,09 ETH</p>
-                </div>
-                <div class="roadmap-sales-item">
-                    <div class="roadmap-sales-item-head">
-                        <span>After sale</span>
-                        <div>24 december</div>
-                    </div>
-                    <p>Reveal Opensea</p>
-                </div>
-            </div>
-
-            <div class="roadmap-step">
-                <div class="roadmap-counter">
-                    <div class="roadmap-counter-text">
-                        <span>10</span>%
-                    </div>
-                </div>
-                <div class="roadmap-content">
-                    <h4>Step 1</h4>
-                    <p>Well … that’s all baby ?</p>
-                </div>
-            </div>
-            <div class="roadmap-step">
-                <div class="roadmap-counter">
-                    <div class="roadmap-counter-text">
-                        <span>20</span>%
-                    </div>
-                </div>
-                <div class="roadmap-content">
-                    <h4>Step 2</h4>
-                    <p>We’ll organise the 5 first Giveaways and <span>will send the 5 first Art Prints signed and numbered</span> by the artist himself :</p>
-                    <ul>
-                        <li>- limited to only 1 copie corresponding to the NFT number</li>
-                        <li>- size 31 » x 31 » (80cm x 80 cm)</li>
-                        <li>- printed on Fine Art Paper "HAHNEMUHLE BARYTE 325G"</li>
-                        <li>- mounted on MUSEUM DIBOND (aluminium)</li>
-                        <li>- hand-numbered in gold pencil</li>
-                        <li>- signed by the artist - includes Certificate of Authenticity</li>
-                        <li>- value 2289 usd / each</li>
-                    </ul>
-                    <div class="roadmap-gallery roadmap-gallery-step2">
-                        <div class="roadmap-gallery-item"><img src="resources/step2-1.jpg" alt="step 2 Print rewards simulate"></div>
-                        <div class="roadmap-gallery-item"><img src="resources/step2-2.jpg" alt="step 2 Print COA"></div>
-                        <div class="roadmap-gallery-item"><img src="resources/step2-3.jpg" alt="step 2 Print original"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="roadmap-step">
-                <div class="roadmap-counter">
-                    <div class="roadmap-counter-text">
-                        <span>50</span>%
-                    </div>
-                </div>
-                <div class="roadmap-content">
-                    <h4>Step 3</h4>
-                    <p>We’ll introduce the <span>1st Special One : The “Golden One”</span>. To celebrate the 50%, We’ll organise a GiveAway to know who will win <span>the Special Bat Art Print signed and numbered</span> by the artist himself :</p>
-                    <ul>
-                        <li>- signed and numbered by the artist himself</li>
-                        <li>- limited to only 10 copies in the world</li>
-                        <li>- size 31 » x 47 » (80cm x 120 cm)</li>
-                        <li>- printed on Fine Art Paper "HAHNEMUHLE BARYTE 325G"</li>
-                        <li>- mounted on MUSEUM DIBOND (aluminium)</li>
-                        <li>- hand-numbered in gold pencil</li>
-                        <li>- signed by the artist</li>
-                        <li>- includes Certificate of Authenticity</li>
-                        <li>- value 3889 usd / each</li>
-                    </ul>
-                    <div class="roadmap-gallery roadmap-gallery-step3">
-                        <div class="roadmap-gallery-item"><img src="resources/step3-1.jpg" alt="step 3 Print rewards simulate"></div>
-                        <div class="roadmap-gallery-item"><img src="resources/step3-2.jpg" alt="step 3 Print COA"></div>
-                        <div class="roadmap-gallery-item"><img src="resources/step3-3.jpg" alt="step 3 Print original"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="roadmap-step">
-                <div class="roadmap-counter">
-                    <div class="roadmap-counter-text">
-                        <span>75</span>%
-                    </div>
-                </div>
-                <div class="roadmap-content with-single-image">
-                    <div class="roadmap-content-left">
-                        <h4>Step 4</h4>
-                        <p>We’ll unveil <span>the winner of the « Golden One »</span> who will receve that <span>Special one Statue</span> !</p>
-                        <ul>
-                            <li>- height: 25.75 » (65.4 cm)</li>
-                            <li>- width: 9 » (22.9 cm)</li>
-                            <li>- depth: 9 » (22.9 cm)</li>
-                            <li>- weight: 12 lbs (5.4 kg)</li>
-                            <li>- material : Fabric / Polyresin</li>
-                            <li>- value 2889 usd</li>
-                        </ul>
-                    </div>
-                    <div class="roadmap-content-right">
-                        <img src="resources/statut-batman-doree.jpg" alt="Statut Batman Dorée">
-                    </div>
-                </div>
-            </div>
-            <div class="roadmap-step">
-                <div class="roadmap-counter">
-                    <div class="roadmap-counter-text">
-                        <span>100</span>%
-                    </div>
-                </div>
-                <div class="roadmap-content">
-                    <h4>Step 5</h4>
-                    <p>We’ll organise <span>the next 5 Giveaways</span> and will send the next 5 Art Prints signed and numbered by the artist himself.</p>
-                    <p>After the reveal, <span>the first owner who will find and contact us with the easter egg in hands will win the 20ETH price !</span></p>
-                </div>
-            </div>
-            <div class="roadmap-step">
-                <div class="roadmap-counter">
-                    <span class="roadmap-counter-heading">After the</span>
-                    <div class="roadmap-counter-text">
-                        <span>100</span>%
-                    </div>
-                </div>
-                <div class="roadmap-content">
-                    <h4>Step 6</h4>
-                    <p>Then what will Happen ? <br> During the next year to come,<span>the 2 next steps are already waiting to be launched</span> …</p>
-                    <ul style="margin-bottom: 2rem;">
-                        <li>- Serie Phase II of the FonkyBats Family</li>
-                        <li>- Special Ones Series</li>
-                    </ul>
-                    <p>Finaly, <span>the future of the project is in your hands !</span></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="team">
-            <img class="team-title" src="resources/the-team.png" alt="FonkyBats Team">
-            <div class="team-section">
-                <div class="team-aside">
-                    <img class="team-aside-big" src="resources/freddy-team.gif" alt="Freddy Miet avatar">
-                </div>
-                <div class="team-content">
-                    <h3>Freddy Miet</h3>
-                    <h4>Artist and project director</h4>
-                    <p>He’s the one that launch the project.<br> With more than <span>15 years</span> in Art Business, he’s an artist working in Digital Photography Art since more than 20 years and also directed some Multiples Short Movies and Video Clip. So you can prepare yourself for some very cool Surprises !</p>
-                </div>
-            </div>
-            <div class="team-section">
-                <div class="team-aside">
-                    <img src="resources/Than.jpg" alt="Than avatar">
-                </div>
-                <div class="team-content">
-                    <h3>Than</h3>
-                    <h4>Marketing director</h4>
-                    <p>He’s the one who bring that project to the moon ! If you talk with someone on a social Media : that’s Mr Than !</p>
-                </div>
-            </div>
-            <div class="team-section">
-                <div class="team-aside">
-                    <img src="resources/sky-olivr.jpeg" alt="Sky Oliv'r avatar">
-                </div>
-                <div class="team-content">
-                    <h3>Sky Oliv'r</h3>
-                    <h4>Supreme Dev</h4>
-                    <p>He’s the one who build the dev around the project. He’s the Code Genius !</p>
-                </div>
-            </div>
-            <div class="team-section">
-                <div class="team-aside">
-                    <img src="resources/statut-batman-doree.jpg" alt="Maxi Bab's avatar">
-                </div>
-                <div class="team-content">
-                    <h3>Maxi Bab's</h3>
-                    <h4>Smart contract God</h4>
-                    <p>He’s the one who build the smart contract for the project. Don’t laugh with him dudes !</p>
-                </div>
-            </div>
-        </div>
-
     </div>
-    <!-- end block container -->
 
-    <div class="accordion">
-        <div class="accordion-title">
-          <h3>Frequently asked questions</h3>
+    <div class="header-scroll">
+        <div class="header-scroll-content">
+            <div class="header-scroll-circle"></div>
         </div>
-        <div class="accordion-section">
-           <div class="accordion-body">
+        <div class="header-scroll-text">Scroll down</div>
+    </div>
+
+</header>
+
+<!-- start block container -->
+<div class="container">
+
+    <div class="about">
+        <div class="about-intro">
+            <div class="about-content">
+                <div class="about-heading">About</div>
+                <img alt="9,999 unique FonkyBats" class="about-title" src="resources/9999-unique-Fonkybats.png">
+                <p><span>FonkyBats</span> is a personal and artistic project directed by an artist rich of a 20 years
+                    experience in creative artwork and art business : here is <span>FonkyBats !</span></p>
+                <p>Freddy Miet started to work on that project with the central idea to bring old art to new art, <span>mixing masterpieces and history of art inside the NFT’s through a playful way for the young generations.</span>
+                    the artist second idea have been to play with codes of Generative Art to create something totaly
+                    original and unique.</p>
+            </div>
+            <div class="about-aside">
+                <img alt="gallery FonbkyBats NFT" class="about-gallery" src="resources/fonkyBats-about.gif">
+            </div>
+        </div>
+        <div class="about-helmet">
+            <div class="about-subtitle">Some rares, super rares and<br> Legendary Helmets</div>
+            <ul class="about-helmet-items">
+                <li><img alt="helmet legendaire" class="about-helmet-item" src="resources/helmet-1.jpg"></li>
+                <li><img alt="helmet legendaire" class="about-helmet-item" src="resources/helmet-2.jpg"></li>
+                <li><img alt="helmet legendaire" class="about-helmet-item" src="resources/helmet-3.jpg"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="roadmap">
+        <div class="roadmap-heading">
+            <img alt="FonkyBats roadmap" class="roadmap-title" src="resources/roadmap.png">
+            <p class="roadmap-subtitle">FonykBats will launch on <span>20 December 2021</span>.<br>Collect your favorite
+                Bat and join our family.</p>
+        </div>
+
+        <div class=roadmap-sales>
+            <div class="roadmap-sales-item">
+                <div class="roadmap-sales-item-head">
+                    <span>Pre Sale</span>
+                    <div>17 december</div>
+                </div>
+                <p>0,07 ETH</p>
+            </div>
+            <div class="roadmap-sales-item">
+                <div class="roadmap-sales-item-head">
+                    <span>Main sale</span>
+                    <div>20 december</div>
+                </div>
+                <p>0,09 ETH</p>
+            </div>
+            <div class="roadmap-sales-item">
+                <div class="roadmap-sales-item-head">
+                    <span>After sale</span>
+                    <div>24 december</div>
+                </div>
+                <p>Reveal Opensea</p>
+            </div>
+        </div>
+
+        <div class="roadmap-step">
+            <div class="roadmap-counter">
+                <div class="roadmap-counter-text">
+                    <span>10</span>%
+                </div>
+            </div>
+            <div class="roadmap-content">
+                <h4>Step 1</h4>
+                <p>Well … that’s all baby ?</p>
+            </div>
+        </div>
+        <div class="roadmap-step">
+            <div class="roadmap-counter">
+                <div class="roadmap-counter-text">
+                    <span>20</span>%
+                </div>
+            </div>
+            <div class="roadmap-content">
+                <h4>Step 2</h4>
+                <p>We’ll organise the 5 first Giveaways and
+                    <span>will send the 5 first Art Prints signed and numbered</span> by the artist himself :</p>
+                <ul>
+                    <li>- limited to only 1 copie corresponding to the NFT number</li>
+                    <li>- size 31 » x 31 » (80cm x 80 cm)</li>
+                    <li>- printed on Fine Art Paper "HAHNEMUHLE BARYTE 325G"</li>
+                    <li>- mounted on MUSEUM DIBOND (aluminium)</li>
+                    <li>- hand-numbered in gold pencil</li>
+                    <li>- signed by the artist - includes Certificate of Authenticity</li>
+                    <li>- value 2289 usd / each</li>
+                </ul>
+                <div class="roadmap-gallery roadmap-gallery-step2">
+                    <div class="roadmap-gallery-item"><img alt="step 2 Print rewards simulate"
+                                                           src="resources/step2-1.jpg"></div>
+                    <div class="roadmap-gallery-item"><img alt="step 2 Print COA" src="resources/step2-2.jpg"></div>
+                    <div class="roadmap-gallery-item"><img alt="step 2 Print original" src="resources/step2-3.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="roadmap-step">
+            <div class="roadmap-counter">
+                <div class="roadmap-counter-text">
+                    <span>50</span>%
+                </div>
+            </div>
+            <div class="roadmap-content">
+                <h4>Step 3</h4>
+                <p>We’ll introduce the <span>1st Special One : The “Golden One”</span>. To celebrate the 50%, We’ll
+                    organise a GiveAway to know who will win <span>the Special Bat Art Print signed and numbered</span>
+                    by the artist himself :</p>
+                <ul>
+                    <li>- signed and numbered by the artist himself</li>
+                    <li>- limited to only 10 copies in the world</li>
+                    <li>- size 31 » x 47 » (80cm x 120 cm)</li>
+                    <li>- printed on Fine Art Paper "HAHNEMUHLE BARYTE 325G"</li>
+                    <li>- mounted on MUSEUM DIBOND (aluminium)</li>
+                    <li>- hand-numbered in gold pencil</li>
+                    <li>- signed by the artist</li>
+                    <li>- includes Certificate of Authenticity</li>
+                    <li>- value 3889 usd / each</li>
+                </ul>
+                <div class="roadmap-gallery roadmap-gallery-step3">
+                    <div class="roadmap-gallery-item"><img alt="step 3 Print rewards simulate"
+                                                           src="resources/step3-1.jpg"></div>
+                    <div class="roadmap-gallery-item"><img alt="step 3 Print COA" src="resources/step3-2.jpg"></div>
+                    <div class="roadmap-gallery-item"><img alt="step 3 Print original" src="resources/step3-3.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="roadmap-step">
+            <div class="roadmap-counter">
+                <div class="roadmap-counter-text">
+                    <span>75</span>%
+                </div>
+            </div>
+            <div class="roadmap-content with-single-image">
+                <div class="roadmap-content-left">
+                    <h4>Step 4</h4>
+                    <p>We’ll unveil <span>the winner of the « Golden One »</span> who will receve that <span>Special one Statue</span>
+                        !</p>
+                    <ul>
+                        <li>- height: 25.75 » (65.4 cm)</li>
+                        <li>- width: 9 » (22.9 cm)</li>
+                        <li>- depth: 9 » (22.9 cm)</li>
+                        <li>- weight: 12 lbs (5.4 kg)</li>
+                        <li>- material : Fabric / Polyresin</li>
+                        <li>- value 2889 usd</li>
+                    </ul>
+                </div>
+                <div class="roadmap-content-right">
+                    <img alt="Statut Batman Dorée" src="resources/statut-batman-doree.jpg">
+                </div>
+            </div>
+        </div>
+        <div class="roadmap-step">
+            <div class="roadmap-counter">
+                <div class="roadmap-counter-text">
+                    <span>100</span>%
+                </div>
+            </div>
+            <div class="roadmap-content">
+                <h4>Step 5</h4>
+                <p>We’ll organise <span>the next 5 Giveaways</span> and will send the next 5 Art Prints signed and
+                    numbered by the artist himself.</p>
+                <p>After the reveal, <span>the first owner who will find and contact us with the easter egg in hands will win the 20ETH price !</span>
+                </p>
+            </div>
+        </div>
+        <div class="roadmap-step">
+            <div class="roadmap-counter">
+                <span class="roadmap-counter-heading">After the</span>
+                <div class="roadmap-counter-text">
+                    <span>100</span>%
+                </div>
+            </div>
+            <div class="roadmap-content">
+                <h4>Step 6</h4>
+                <p>Then what will Happen ? <br> During the next year to come,<span>the 2 next steps are already waiting to be launched</span>
+                    …</p>
+                <ul style="margin-bottom: 2rem;">
+                    <li>- Serie Phase II of the FonkyBats Family</li>
+                    <li>- Special Ones Series</li>
+                </ul>
+                <p>Finaly, <span>the future of the project is in your hands !</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="team">
+        <img alt="FonkyBats Team" class="team-title" src="resources/the-team.png">
+        <div class="team-section">
+            <div class="team-aside">
+                <img alt="Freddy Miet avatar" class="team-aside-big" src="resources/freddy-team.gif">
+            </div>
+            <div class="team-content">
+                <h3>Freddy Miet</h3>
+                <h4>Artist and project director</h4>
+                <p>He’s the one that launch the project.<br> With more than <span>15 years</span> in Art Business, he’s
+                    an artist working in Digital Photography Art since more than 20 years and also directed some
+                    Multiples Short Movies and Video Clip. So you can prepare yourself for some very cool Surprises !
+                </p>
+            </div>
+        </div>
+        <div class="team-section">
+            <div class="team-aside">
+                <img alt="Than avatar" src="resources/Than.jpg">
+            </div>
+            <div class="team-content">
+                <h3>Than</h3>
+                <h4>Marketing director</h4>
+                <p>He’s the one who bring that project to the moon ! If you talk with someone on a social Media : that’s
+                    Mr Than !</p>
+            </div>
+        </div>
+        <div class="team-section">
+            <div class="team-aside">
+                <img alt="Sky Oliv'r avatar" src="resources/sky-olivr.jpeg">
+            </div>
+            <div class="team-content">
+                <h3>Sky 73k05</h3>
+                <h4>Supreme Dev</h4>
+                <p>He’s the one who build the dev around the project. He’s the Code Genius !</p>
+            </div>
+        </div>
+        <div class="team-section">
+            <div class="team-aside">
+                <img alt="Maxi Bab's avatar" src="resources/statut-batman-doree.jpg">
+            </div>
+            <div class="team-content">
+                <h3>Maxi Bab's</h3>
+                <h4>Smart contract God</h4>
+                <p>He’s the one who build the smart contract for the project. Don’t laugh with him dudes !</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- end block container -->
+
+<div class="accordion">
+    <div class="accordion-title">
+        <h3>Frequently asked questions</h3>
+    </div>
+    <div class="accordion-section">
+        <div class="accordion-body">
             <div class="accordion-label">
                 <h4>When I will be able to Mint some Fonkybats ?</h4>
             </div>
             <div class="accordion-content">
                 <p>These days, the Mint Date have been fixed for the 20 December</p>
             </div>
-          </div>
         </div>
-        <div class="accordion-section">
-           <div class="accordion-body">
+    </div>
+    <div class="accordion-section">
+        <div class="accordion-body">
             <div class="accordion-label">
                 <h4>When and where I will be able to see my NFT ?</h4>
             </div>
             <div class="accordion-content">
-                <p>The reveal for the final look of your NFT have been fixed for the 24 December Midnight ! You will be able to see your Nft on the opensea link  just here : <br><a href="" target="blank">Lien Opensea</a></p>
+                <p>The reveal for the final look of your NFT have been fixed for the 24 December Midnight ! You will be
+                    able to see your Nft on the opensea link just here : <br><a href="" target="blank">Lien Opensea</a>
+                </p>
             </div>
-          </div>
         </div>
-        <div class="accordion-section">
-           <div class="accordion-body">
+    </div>
+    <div class="accordion-section">
+        <div class="accordion-body">
             <div class="accordion-label">
                 <h4>How many FonkyBats will there be available?</h4>
             </div>
             <div class="accordion-content">
                 <p>9997 generative, 1 Golden One and 1 Hidden Easter Egg.</p>
             </div>
-          </div>
         </div>
-        <div class="accordion-section">
-           <div class="accordion-body">
+    </div>
+    <div class="accordion-section">
+        <div class="accordion-body">
             <div class="accordion-label">
                 <h4>How many Layers for Hom Many Properties ?</h4>
             </div>
             <div class="accordion-content">
                 <p>More than 350 Different Layers dispatch in 12 Properties</p>
             </div>
-          </div>
         </div>
-        <div class="accordion-section">
-           <div class="accordion-body">
+    </div>
+    <div class="accordion-section">
+        <div class="accordion-body">
             <div class="accordion-label">
                 <h4>When will I be able to mint a FonkyBat ?</h4>
             </div>
             <div class="accordion-content">
                 <p>22 December for a Reveal at Christmas Morning</p>
             </div>
-          </div>
         </div>
-        <div class="accordion-section">
-           <div class="accordion-body">
+    </div>
+    <div class="accordion-section">
+        <div class="accordion-body">
             <div class="accordion-label">
                 <h4>What blockchain will you be using ?</h4>
             </div>
             <div class="accordion-content">
                 <p>The Ethereum Blockchain.</p>
             </div>
-          </div>
         </div>
-        <div class="accordion-section">
-           <div class="accordion-body">
+    </div>
+    <div class="accordion-section">
+        <div class="accordion-body">
             <div class="accordion-label">
                 <h4>How much will it cost to mint one FonkyBat ?</h4>
             </div>
             <div class="accordion-content">
                 <p>0.09 ETH</p>
             </div>
-          </div>
         </div>
-        <div class="accordion-section">
-           <div class="accordion-body">
+    </div>
+    <div class="accordion-section">
+        <div class="accordion-body">
             <div class="accordion-label">
                 <h4>What are the secondary royalty fees ?</h4>
             </div>
             <div class="accordion-content">
                 <p>7 %</p>
             </div>
-          </div>
         </div>
-        <div class="accordion-section">
-           <div class="accordion-body">
+    </div>
+    <div class="accordion-section">
+        <div class="accordion-body">
             <div class="accordion-label">
                 <h4>Will there be giveaways ?</h4>
             </div>
             <div class="accordion-content">
-                <p>That's the point of that project: organizing some giveaways before the launch and then every 2 weeks during one year after the 100% reach: then we will send some real stuff to the NFT owners !</p>
+                <p>That's the point of that project: organizing some giveaways before the launch and then every 2 weeks
+                    during one year after the 100% reach: then we will send some real stuff to the NFT owners !</p>
             </div>
-          </div>
         </div>
-        <div class="accordion-section">
-           <div class="accordion-body">
+    </div>
+    <div class="accordion-section">
+        <div class="accordion-body">
             <div class="accordion-label">
                 <h4>there be a pre-sale ?</h4>
             </div>
             <div class="accordion-content">
                 <p>The 18 December : 400 winner will be able to mint 5 NFT Max !</p>
             </div>
-          </div>
         </div>
-        <div class="accordion-section">
-           <div class="accordion-body">
+    </div>
+    <div class="accordion-section">
+        <div class="accordion-body">
             <div class="accordion-label">
                 <h4>What drop structure do you have ?</h4>
             </div>
             <div class="accordion-content">
-                <p>There will be raffles to make it fair for everyone without high gas fees, additional information may be found.</p>
+                <p>There will be raffles to make it fair for everyone without high gas fees, additional information may
+                    be found.</p>
             </div>
-          </div>
+        </div>
+    </div>
+</div>
+
+<div class="cta">
+    <h3 class="cta-title">Join FonkyBats family</h3>
+    <div class="cta-buttons">
+        <a class="btn" href="#"><span>Join our discord</span></a>
+        <span class="cta-divider">Or</span>
+        <button class="btn"><span>Connect Wallet</span></button>
+    </div>
+</div>
+
+<footer class="footer">
+    <img alt="logo fonkyBats" class="footer-logo" src="resources/logo-fonkybats.png">
+    <div class="footer-container">
+        <div class="footer-left">
+            <nav class="footer-nav">
+                <a class="is-active" href="index.html">Home</a>
+                <a href="index.html">Terms & conditions</a>
+                <a href="index.html" target="_blank">Smart contracts</a>
+            </nav>
+        </div>
+        <div class="footer-right">
+            <ul class="footer-social">
+                <li><a href="#" target="_blank"><img alt="FonkyBats discord" src="resources/icon-discord.png"></a></li>
+                <li><a href="#" target="_blank"><img alt="FonkyBats opensea" src="resources/icon-opensea.png"></a></li>
+                <li><a href="#" target="_blank"><img alt="FonkyBats twitter" src="resources/icon-twitter.png"></a></li>
+            </ul>
+            <span class="footer-copyright">@2021 FonkyBats. All right reserved.</span>
         </div>
     </div>
 
-    <div class="cta">
-        <h3 class="cta-title">Join FonkyBats family</h3>
-        <div class="cta-buttons">
-            <a href="#" class="btn"><span>Join our discord</span></a>
-            <span class="cta-divider">Or</span>
-            <button class="btn"><span>Connect Wallet</span></button>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <img class="footer-logo" src="resources/logo-fonkybats.png" alt="logo fonkyBats">
-        <div class="footer-container">
-            <div class="footer-left">
-                <nav class="footer-nav">
-                    <a class="is-active" href="index.html">Home</a>
-                    <a href="index.html">Terms & conditions</a>
-                    <a href="index.html" target="_blank">Smart contracts</a>
-                </nav>
-            </div>
-            <div class="footer-right">
-                <ul class="footer-social">
-                    <li><a href="#" target="_blank"><img src="resources/icon-discord.png" alt="FonkyBats discord"></a></li>
-                    <li><a href="#" target="_blank"><img src="resources/icon-opensea.png" alt="FonkyBats opensea"></a></li>
-                    <li><a href="#" target="_blank"><img src="resources/icon-twitter.png" alt="FonkyBats twitter"></a></li>
-                </ul>
-                <span class="footer-copyright">@2021 FonkyBats. All right reserved.</span>
-            </div>
-        </div>
-
-    </footer>
+</footer>
 </body>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<script src="libs/flickity.pkgd.min.js"></script>
+<script src="libs/jquery-3.6.0.min.js"></script>
+<script src="libs/web3js/web3.min.js"></script>
 
 <script src="javascript/fonkybats.js" type="text/javascript"></script>
 <script src="javascript/flickity.js" type="text/javascript"></script>
 <script src="javascript/accordion.js" type="text/javascript"></script>
+<script src="javascript/countdown.js" type="text/javascript"></script>
 
 </html>

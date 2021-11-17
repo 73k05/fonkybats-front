@@ -75,25 +75,44 @@ const GET_SALE_STATE_ABI = [
     },
 ];
 
+const CONTRACT_SALE_STATE_PRESALE = 1;
+const CONTRACT_SALE_STATE_MAINSALE = 2;
+
 const network =
     NETWORK === "mainnet" || NETWORK === "live" ? "mainnet" : "rinkeby";
 const web3Instance = new Web3(Web3.givenProvider, "https://eth-" + network + ".alchemyapi.io/v2/" + NODE_API_KEY);
 
 /**
- * Init sale state in UIX
+ * Init Document like displaying wallet address
  */
 $(document).ready(function () {
+});
+
+/**
+ * Init sale state in UIX
+ */
+function initSaleState() {
     getSaleState().then(contractSaleState => {
         console.log(`State gotten ${contractSaleState}`)
-        document.getElementById("contractSaleState").innerHTML = contractSaleState;
-        if (contractSaleState == 1) {
-            document.getElementById("nftPreSaleMintButton").removeAttribute("hidden");
+        if (contractSaleState == CONTRACT_SALE_STATE_PRESALE) {
+            displayElementById("nftPreSaleMintButton");
         }
-        if (contractSaleState == 2) {
-            document.getElementById("nftSaleMintButton").removeAttribute("hidden");
+        if (contractSaleState == CONTRACT_SALE_STATE_MAINSALE) {
+            displayElementById("nftSaleMintButton");
         }
     });
-});
+}
+
+function initAdminUi(mintAddress){
+    if (mintAddress !== OWNER_ADDRESS) {
+        console.log(`mintAddress: ${mintAddress}`);
+        return;
+    }
+
+    displayElementById("nftMintDiv");
+    displayElementById("headerSale");
+    hideElementById("headerLoading");
+}
 
 /**
  * Set SaleState
@@ -134,6 +153,31 @@ async function setStatePreOrder() {
 
 async function setStateMainSale() {
     setState(2).then(r => console.log(`Sate saved ${r}`));
+}
+
+/**
+ * Connect Metamask Wallet
+ * @returns {Promise<void>}
+ */
+async function connectWallet() {
+    let accounts = await web3Instance.eth.requestAccounts();
+    const mintAddress = accounts[0];
+
+    if (mintAddress === undefined || mintAddress === null) {
+        console.error(`Wallet address error ${mintAddress}`);
+        return;
+    }
+
+    // Set & display wallet infos
+    getElementById("walletAddressSpan").innerText = mintAddress.substr(0, 6).concat("...").concat(mintAddress.substr(mintAddress.length - 5, mintAddress.length - 1));
+    displayElementById("walletAddressLabel");
+    //Hide connect button
+    hideElementById("walletConnectButton");
+    hideElementById("walletConnectLoadingButton");
+
+    //Init sale state
+    initSaleState();
+    initAdminUi(mintAddress);
 }
 
 /**
@@ -201,7 +245,7 @@ async function mintNfts(numFonkyBats) {
 }
 
 /**
- * Set
+ * Set Sale State in Smart Contract
  * @returns {Promise<void>}
  */
 async function getSaleState() {
@@ -210,7 +254,34 @@ async function getSaleState() {
         NFT_CONTRACT_ADDRESS,
         {gasLimit: "1000000"}
     );
+
     const saleState = await fonkyContract.methods.saleState.call().call();
     console.log(`Sale State in contract: ${saleState}`);
     return saleState;
+}
+
+
+/**
+ * Get element in HTML by id
+ * @param id of the element
+ * @returns {HTMLElement}
+ */
+function getElementById(id) {
+    return document.getElementById(id);
+}
+
+/**
+ * Display Element by id, remove class "hide"
+ * @param id of the element to display
+ */
+function displayElementById(id) {
+    getElementById(id).classList.remove("hide");
+}
+
+/**
+ * Hide Element by id, add class "hide"
+ * @param id of the element to hide
+ */
+function hideElementById(id) {
+    getElementById(id).classList.add("hide");
 }

@@ -2,8 +2,6 @@
 Accordion components
 ------- */ 
 
-@import "../_media_queries.css";
-
 .about {
   padding: 10rem 0 12rem;
 }

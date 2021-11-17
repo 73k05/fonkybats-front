@@ -2,8 +2,6 @@
 footer components
 ------- */ 
 
-@import "../_media_queries.css";
-
 .footer {
   padding: 6rem 2rem 7.5rem;
   margin: 0 auto;

@@ -321,3 +321,11 @@ responsive
 .header-form.hide{
   display: none;
 }
+
+.header-btn-wallet.hide{
+  display: none;
+}
+
+.header.hide{
+  display: none;
+}
