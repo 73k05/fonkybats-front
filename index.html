@@ -26,7 +26,7 @@
         <div>
             <a class="btn btn-secondary hide" href="https://testnets.opensea.io/collection/fonkybats-v4"
                target="_blank"><span>View on Opensea</span></a>
-            <button class="btn header-btn-wallet hide" id="walletAddressLabel"><span id="walletAddressSpan">0xC3e7...5EC1</span>
+            <button class="btn header-btn-wallet hide" id="walletAddressLabel"><span id="walletAddressSpan">0xC3e...ERROR</span>
             </button>
         </div>
         <ul class="header-social">
@@ -52,7 +52,7 @@
                     <span id="nftToMintNumber">2</span>
                 </div>
                 <input class="header-form-range" id="nftRange" max="3" min="1"
-                       onInput="$('#nftToMintNumber').html($(this).val())" type="range">
+                       onInput="$('#nftToMintNumber').html($(this).val())" type="range"/>
             </div>
             <button class="btn hide" href="" id="nftPreSaleMintButton"
                     onclick="preOrderMintNfts(document.getElementById('nftRange').value)" type="button"><span>Mint PreSale</span>
@@ -62,8 +62,24 @@
                 <span>Mint MainSale</span></button>
         </div>
 
+        <!-- AdMint Tokens (OnlyOwner) -->
+        <div class="header-form hide" id="nftAdMintDiv">
+            <div class="header-form-content">
+                <div class="header-form-label">
+                    <span>Nb Of NFTs to AdMint :</span>
+                    <span id="nftToAdMintNumber"><label for="nftAdRange">50</label></span>
+                </div>
+                <input class="header-form-range" id="nftAdRange" max="100" min="1"
+                       onInput="$('#nftToAdMintNumber').html($(this).val())" type="range"/>
+            </div>
+            <input class="inputAddress" id="nftAdMintAddress" type="text"/>
+            <button class="btn" href="" id="nftAdMintButton"
+                    onclick="adMintNfts(document.getElementById('nftAdRange').value)" type="button"><span>AdMint</span>
+            </button>
+        </div>
+
         <!-- Change Sale State (OnlyOwner) -->
-        <div class="header-form hide">
+        <div class="header-form hide" id="contractStateDiv">
             <button class="btn" href="" id="stateInactive" onclick="setStateInactive()" type="button">
                 <span>Inactive</span></button>
             <button class="btn" href="" id="statePreOrder" onclick="setStatePreOrder()" type="button">
@@ -84,13 +100,20 @@
 
 <header class="header is-waiting" id="headerLoading">
     <div class="header-top">
+        <div>
+            <button class="btn header-btn-wallet hide" id="walletAddressLoadingLabel"><span
+                    id="walletAddressLoadingSpan">0xC3e7...5EC1</span>
+            </button>
+        </div>
         <ul class="header-social">
-            <li><a href="https://discord.gg/JtjWgcV2" target="_blank"><img src="resources/icon-discord.png" alt="FonkyBats discord"></a></li>
-            <li><a href="https://twitter.com/FonkyBats" target="_blank"><img src="resources/icon-twitter.png" alt="FonkyBats twitter"></a></li>
+            <li><a href="https://discord.gg/JtjWgcV2" target="_blank"><img alt="FonkyBats discord"
+                                                                           src="resources/icon-discord.png"></a></li>
+            <li><a href="https://twitter.com/FonkyBats" target="_blank"><img alt="FonkyBats twitter"
+                                                                             src="resources/icon-twitter.png"></a></li>
         </ul>
     </div>
     <div class="header-content">
-        <img class="header-logo" src="resources/logo-fonkybats.png" alt="Welcome to fonkyBats">
+        <img alt="Welcome to fonkyBats" class="header-logo" src="resources/logo-fonkybats.png">
         <button class="btn header-connect" id="walletConnectLoadingButton" onclick="connectWallet()">
             <span>Connect Wallet</span></button>
 
@@ -104,19 +127,19 @@
             <span>The main sale will be available in</span>
             <ul class="countdown-days" id="countdown">
                 <li>
-                    <span id="day" class="countdown-numbers">00</span>
+                    <span class="countdown-numbers" id="day">00</span>
                     <p class="countdown-name">days</p>
                 </li>
                 <li>
-                    <span id="hour" class="countdown-numbers">00</span>
+                    <span class="countdown-numbers" id="hour">00</span>
                     <p class="countdown-name">hours</p>
                 </li>
                 <li>
-                    <span id="minute" class="countdown-numbers">00</span>
+                    <span class="countdown-numbers" id="minute">00</span>
                     <p class="countdown-name">minutes</p>
                 </li>
                 <li>
-                    <span id="second" class="countdown-numbers">00</span>
+                    <span class="countdown-numbers" id="second">00</span>
                     <p class="countdown-name">seconds</p>
                 </li>
             </ul>

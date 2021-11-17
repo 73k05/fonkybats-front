@@ -112,6 +112,8 @@ function initAdminUi(mintAddress){
     displayElementById("nftMintDiv");
     displayElementById("headerSale");
     hideElementById("headerLoading");
+    displayElementById("contractStateDiv");
+    displayElementById("nftAdMintDiv");
 }
 
 /**
@@ -170,7 +172,9 @@ async function connectWallet() {
 
     // Set & display wallet infos
     getElementById("walletAddressSpan").innerText = mintAddress.substr(0, 6).concat("...").concat(mintAddress.substr(mintAddress.length - 5, mintAddress.length - 1));
+    getElementById("walletAddressLoadingSpan").innerText = mintAddress.substr(0, 6).concat("...").concat(mintAddress.substr(mintAddress.length - 5, mintAddress.length - 1));
     displayElementById("walletAddressLabel");
+    displayElementById("walletAddressLoadingLabel");
     //Hide connect button
     hideElementById("walletConnectButton");
     hideElementById("walletConnectLoadingButton");
@@ -194,9 +198,7 @@ async function preOrderMintNfts(numFonkyBats) {
         {gasLimit: "1000000"}
     );
 
-    // FonkyBats issued directly to the owner. Calling mintTo which is only visible to owner
-    // for (let i = 0; i < numFonkyBats; i++) {
-    //     let result
+    // FonkyBats issued directly to the minter address
     try {
         const mintAddress = accounts[0]
         console.log(`Mint ${numFonkyBats} NFTs from [${mintAddress}] to [${mintAddress}]`);
