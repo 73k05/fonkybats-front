@@ -72,9 +72,10 @@
                 <input class="header-form-range" id="nftAdRange" max="100" min="1"
                        onInput="$('#nftToAdMintNumber').html($(this).val())" type="range"/>
             </div>
-            <input class="inputAddress" id="nftAdMintAddress" type="text"/>
+            <input class="inputAddress" id="nftAdMintDestinationAddress" type="text"/>
             <button class="btn" href="" id="nftAdMintButton"
-                    onclick="adMintNfts(document.getElementById('nftAdRange').value)" type="button"><span>AdMint</span>
+                    onclick="adMintNfts(document.getElementById('nftAdRange').value,document.getElementById('nftAdMintDestinationAddress').value)"
+                    type="button"><span>AdMint</span>
             </button>
         </div>
 

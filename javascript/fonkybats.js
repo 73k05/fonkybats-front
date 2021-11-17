@@ -103,7 +103,11 @@ function initSaleState() {
     });
 }
 
-function initAdminUi(mintAddress){
+/**
+ * Init Some UI for Owner Only
+ * @param mintAddress should be the owner of the contract otherwise this function does nothing
+ */
+function initAdminUi(mintAddress) {
     if (mintAddress !== OWNER_ADDRESS) {
         console.log(`mintAddress: ${mintAddress}`);
         return;
@@ -211,7 +215,6 @@ async function preOrderMintNfts(numFonkyBats) {
         return;
     }
     console.log("Minted Bats successfully. Transaction: " + result.transactionHash);
-    // }
 }
 
 /**
@@ -244,6 +247,16 @@ async function mintNfts(numFonkyBats) {
         }
         console.log("Minted Bats successfully. Transaction: " + result.transactionHash);
     }
+}
+
+/**
+ * Real NFTs Minting (with gas fees) Only For Owner of the contract, should be used before presale
+ * @param numFonkyBats number of NFTs to Mint
+ * @param addressDestination the address where to send those NTFs after these have been minted
+ * @returns {Promise<void>}
+ */
+async function adMintNfts(numFonkyBats, addressDestination) {
+
 }
 
 /**
