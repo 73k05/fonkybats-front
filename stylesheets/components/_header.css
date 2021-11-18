@@ -100,6 +100,11 @@ header components
   justify-content: space-between;
 }
 
+.header-form-content {
+  flex: 1;
+  margin-right: 3rem;
+}
+
 .header-form-label span:first-child {
   color: var(--grayD4);
   font-size: 1.6rem;
@@ -120,7 +125,7 @@ header components
   height: 0.8rem;
   overflow: visible;
   position: relative;
-  width: 20rem;
+  width: 100%;
 }
 
 .header-form-range::-webkit-slider-thumb {  
@@ -133,6 +138,17 @@ header components
   width: 2rem;  
   z-index: 100;
 } 
+
+.header-form-adress {
+  background-color: black;
+  border-radius: 7rem;
+  border: 0.3rem solid #838585;
+  color: #fff;
+  margin-top: 2rem;
+  outline: 0;
+  padding: 1.6rem 3rem;
+  width: 100%;
+}
 
 /* scroll */
 .header-scroll {
@@ -298,6 +314,7 @@ responsive
 
   .header-form-content {
     margin-bottom: 2rem;
+    margin-right: 0;
   }
 
   .countdown {

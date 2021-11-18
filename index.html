@@ -21,7 +21,7 @@
 
 <body>
 
-<header class="header hide" id="headerSale">
+<header class="header " id="headerSale">
     <div class="header-top">
         <div>
             <a class="btn btn-secondary hide" href="https://testnets.opensea.io/collection/fonkybats-v4"
@@ -71,8 +71,8 @@
                 </div>
                 <input class="header-form-range" id="nftAdRange" max="10" min="1"
                        onInput="$('#nftToAdMintNumber').html($(this).val())" type="range"/>
+                <input class="header-form-adress" id="nftAdMintDestinationAddress" type="text" placeholder="Adress"/>
             </div>
-            <input class="inputAddress" id="nftAdMintDestinationAddress" type="text"/>
             <button class="btn" href="" id="nftAdMintButton"
                     onclick="adMintNfts(document.getElementById('nftAdRange').value,document.getElementById('nftAdMintDestinationAddress').value)"
                     type="button"><span>AdMint</span>
@@ -115,7 +115,7 @@
     </div>
     <div class="header-content">
         <img alt="Welcome to fonkyBats" class="header-logo" src="resources/logo-fonkybats.png">
-        <button class="btn header-connect" id="walletConnectLoadingButton" onclick="connectWallet()">
+        <button class="btn header-connect hide" id="walletConnectLoadingButton" onclick="connectWallet()">
             <span>Connect Wallet</span></button>
 
         <div class="countdown">
