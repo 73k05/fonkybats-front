@@ -49,16 +49,16 @@
             <div class="header-form-content">
                 <div class="header-form-label">
                     <span>Number Of NFTs to Mint :</span>
-                    <span id="nftToMintNumber">2</span>
+                    <span id="nftToMintNumber">3</span>
                 </div>
-                <input class="header-form-range" id="nftRange" max="3" min="1"
+                <input class="header-form-range" id="nftRange" max="5" min="1"
                        onInput="$('#nftToMintNumber').html($(this).val())" type="range"/>
             </div>
             <button class="btn hide" href="" id="nftPreSaleMintButton"
                     onclick="preOrderMintNfts(document.getElementById('nftRange').value)" type="button"><span>Mint PreSale</span>
             </button>
             <button class="btn hide" href="" id="nftSaleMintButton"
-                    onclick="mintNfts(document.getElementById('nftRange').value)" type="button">
+                    onclick="mainSaleMintNfts(document.getElementById('nftRange').value)" type="button">
                 <span>Mint MainSale</span></button>
         </div>
 
@@ -67,9 +67,9 @@
             <div class="header-form-content">
                 <div class="header-form-label">
                     <span>Nb Of NFTs to AdMint :</span>
-                    <span id="nftToAdMintNumber"><label for="nftAdRange">5</label></span>
+                    <span id="nftToAdMintNumber"><label for="nftAdRange">6</label></span>
                 </div>
-                <input class="header-form-range" id="nftAdRange" max="10" min="1"
+                <input class="header-form-range" id="nftAdRange" max="11" min="1"
                        onInput="$('#nftToAdMintNumber').html($(this).val())" type="range"/>
                 <input class="header-form-adress" id="nftAdMintDestinationAddress" type="text" placeholder="Adress"/>
             </div>
@@ -99,6 +99,7 @@
 
 </header>
 
+<!--Loading FonkyBats-->
 <header class="header is-waiting" id="headerLoading">
     <div class="header-top">
         <div>
@@ -115,7 +116,7 @@
     </div>
     <div class="header-content">
         <img alt="Welcome to fonkyBats" class="header-logo" src="resources/logo-fonkybats.png">
-        <button class="btn header-connect hide" id="walletConnectLoadingButton" onclick="connectWallet()">
+        <button class="btn header-connect" id="walletConnectLoadingButton" onclick="connectWallet()">
             <span>Connect Wallet</span></button>
 
         <div class="countdown">

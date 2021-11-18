@@ -1,9 +1,10 @@
-const NFT_CONTRACT_ADDRESS = "0xDd92F009FBdC3AE62f855Bc7de336B2412595995";
+const NFT_CONTRACT_ADDRESS = "0x26cE9980534d7EdA0d7acA50c262EDd4104f0768";
 const OWNER_ADDRESS = "0x9Ad99955f6938367F4A703c60a957B639D250a95";
 const NODE_API_KEY = "pXVRmm1TsgoZMNJGcG0zoiqPQJODSDvd";
 
 const NETWORK = "rinkeby";
-const NFT_ABI = [
+
+const NFT_MAIN_SALE_ABI = [
     {
         constant: false,
         inputs: [
@@ -11,11 +12,15 @@ const NFT_ABI = [
                 name: "_to",
                 type: "address",
             },
+            {
+                name: "_numberOfTokens",
+                type: "uint256",
+            },
         ],
-        name: "mintTo",
+        name: "mainSaleMint",
         outputs: [],
-        payable: false,
-        stateMutability: "nonpayable",
+        payable: true,
+        stateMutability: "payable",
         type: "function",
     },
 ];
@@ -37,6 +42,27 @@ const NFT_PRE_ORDER_ABI = [
         outputs: [],
         payable: true,
         stateMutability: "payable",
+        type: "function",
+    },
+];
+
+const NFT_AD_MINT_ABI = [
+    {
+        constant: false,
+        inputs: [
+            {
+                name: "_to",
+                type: "address",
+            },
+            {
+                name: "_numberOfTokens",
+                type: "uint256",
+            },
+        ],
+        name: "adMint",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
         type: "function",
     },
 ];
@@ -77,7 +103,10 @@ const GET_SALE_STATE_ABI = [
 
 const CONTRACT_SALE_STATE_INACTIVE = 0;
 const CONTRACT_SALE_STATE_PRESALE = 1;
-const CONTRACT_SALE_STATE_MAINSALE = 2;
+const CONTRACT_SALE_STATE_MAIN_SALE = 2;
+
+const MINTING_PRE_ORDER_PRICE=0.001
+const MINTING_MAIN_SALE_PRICE=0.001
 
 const network =
     NETWORK === "mainnet" || NETWORK === "live" ? "mainnet" : "rinkeby";
@@ -93,38 +122,56 @@ $(document).ready(function () {
  * Init sale state in UIX
  */
 function initSaleState() {
-    getSaleState().then(contractSaleState => {
+    return getSaleState().then(contractSaleState => {
         console.log(`State gotten ${contractSaleState}`)
         if (contractSaleState === undefined || contractSaleState == CONTRACT_SALE_STATE_INACTIVE) {
-            return;
+            return contractSaleState;
         }
         if (contractSaleState == CONTRACT_SALE_STATE_PRESALE) {
             displayElementById("nftPreSaleMintButton");
         }
-        if (contractSaleState == CONTRACT_SALE_STATE_MAINSALE) {
+        if (contractSaleState == CONTRACT_SALE_STATE_MAIN_SALE) {
             displayElementById("nftSaleMintButton");
         }
 
         displayElementById("nftMintDiv");
         displayElementById("headerSale");
         hideElementById("headerLoading");
+        return contractSaleState;
     });
 }
 
 /**
  * Init Some UI for Owner Only
  * @param mintAddress should be the owner of the contract otherwise this function does nothing
+ * @param contractSaleState current sale state of the contract
  */
-function initAdminUi(mintAddress) {
+function initAdminUi(mintAddress, contractSaleState) {
     if (mintAddress !== OWNER_ADDRESS) {
         console.log(`mintAddress: ${mintAddress}`);
         return;
     }
 
-    displayElementById("nftMintDiv");
+    //Sale minting UI
+    if (contractSaleState === undefined || contractSaleState == CONTRACT_SALE_STATE_INACTIVE) {
+        hideElementById("nftMintDiv");
+    }
+    else{
+        displayElementById("nftMintDiv");
+    }
+    if (contractSaleState == CONTRACT_SALE_STATE_PRESALE) {
+        hideElementById("nftSaleMintButton");
+        displayElementById("nftPreSaleMintButton");
+    }
+    if (contractSaleState == CONTRACT_SALE_STATE_MAIN_SALE) {
+        hideElementById("nftPreSaleMintButton");
+        displayElementById("nftSaleMintButton");
+    }
+
     displayElementById("headerSale");
     hideElementById("headerLoading");
     displayElementById("contractStateDiv");
+    //AdMint is always available for the Owner
     displayElementById("nftAdMintDiv");
 }
 
@@ -144,16 +191,18 @@ async function setState(state) {
 
     console.log(`Change state of Sale to ${state}`);
 
+    const mintAddress = accounts[0];
     try {
         result = await nftContract.methods
             .setSaleState(state)
-            .send({from: accounts[0]});
+            .send({from: mintAddress});
     } catch (error) {
         console.error(`Error while setting state, maybe you are not the owner...`)
         console.error(error)
-        return;
+        return error;
     }
     console.log("State set successfully. Transaction: " + result.transactionHash);
+    initAdminUi(mintAddress, state)
     return result;
 }
 
@@ -192,8 +241,8 @@ async function connectWallet() {
     hideElementById("walletConnectLoadingButton");
 
     //Init sale state
-    initSaleState();
-    initAdminUi(mintAddress);
+    const contractSaleState = await initSaleState();
+    initAdminUi(mintAddress, contractSaleState);
 }
 
 /**
@@ -213,10 +262,11 @@ async function preOrderMintNfts(numFonkyBats) {
     // FonkyBats issued directly to the minter address
     try {
         const mintAddress = accounts[0]
-        console.log(`Mint ${numFonkyBats} NFTs from [${mintAddress}] to [${mintAddress}]`);
+        const mintPayment = (MINTING_PRE_ORDER_PRICE * numFonkyBats).toString()
+        console.log(`Mint ${numFonkyBats} NFTs from [${mintAddress}] to [${mintAddress}] for ${mintPayment}Ξ`);
         result = await nftContract.methods
             .preOrder(mintAddress, numFonkyBats)
-            .send({from: mintAddress, value: web3Instance.utils.toWei("0.01", "ether")});
+            .send({from: mintAddress, value: web3Instance.utils.toWei(mintPayment, "ether")});
     } catch (error) {
         console.error(`Error while minting...`)
         console.error(error)
@@ -226,35 +276,33 @@ async function preOrderMintNfts(numFonkyBats) {
 }
 
 /**
- * Real NFTs Minting (with gas fees)
+ * NFTs Main Sale Minting
  * @param numFonkyBats
  * @returns {Promise<void>}
  */
-async function mintNfts(numFonkyBats) {
+async function mainSaleMintNfts(numFonkyBats) {
     let accounts = await web3Instance.eth.requestAccounts();
 
     const nftContract = new web3Instance.eth.Contract(
-        NFT_ABI,
+        NFT_MAIN_SALE_ABI,
         NFT_CONTRACT_ADDRESS,
         {gasLimit: "1000000"}
     );
 
-    // FonkyBats issued directly to the owner. Calling mintTo which is only visible to owner
-    for (let i = 0; i < numFonkyBats; i++) {
-        let result
-        try {
-            const mintAddress = accounts[0]
-            console.log(`Mint nft-s ${i + 1} from [${OWNER_ADDRESS}] to [${mintAddress}]`);
-            result = await nftContract.methods
-                .mintTo(mintAddress)
-                .send({from: OWNER_ADDRESS});
-        } catch (error) {
-            console.error(`Error while minting...`)
-            console.error(error)
-            return;
-        }
-        console.log("Minted Bats successfully. Transaction: " + result.transactionHash);
+    // FonkyBats issued directly to the minter address
+    try {
+        const mintAddress = accounts[0]
+        const mintPayment = (MINTING_MAIN_SALE_PRICE * numFonkyBats).toString()
+        console.log(`Mint ${numFonkyBats} NFTs from [${mintAddress}] to [${mintAddress}] for ${mintPayment}Ξ`);
+        result = await nftContract.methods
+            .mainSaleMint(mintAddress, numFonkyBats)
+            .send({from: mintAddress, value: web3Instance.utils.toWei(mintPayment, "ether")});
+    } catch (error) {
+        console.error(`Error while minting...`)
+        console.error(error)
+        return;
     }
+    console.log("Minted Bats successfully. Transaction: " + result.transactionHash);
 }
 
 /**
@@ -264,7 +312,31 @@ async function mintNfts(numFonkyBats) {
  * @returns {Promise<void>}
  */
 async function adMintNfts(numFonkyBats, addressDestination) {
+    if(!addressDestination){
+        console.error("Please input destination address")
+        return
+    }
+    let accounts = await web3Instance.eth.requestAccounts();
 
+    const nftContract = new web3Instance.eth.Contract(
+        NFT_AD_MINT_ABI,
+        NFT_CONTRACT_ADDRESS,
+        {gasLimit: "1000000"}
+    );
+
+    // FonkyBats issued directly to the minter address
+    try {
+        const mintAddress = accounts[0]
+        console.log(`AdMint ${numFonkyBats} NFTs from [${mintAddress}] to [${addressDestination}]`);
+        result = await nftContract.methods
+            .adMint(addressDestination, numFonkyBats)
+            .send({from: mintAddress});
+    } catch (error) {
+        console.error(`Error while minting...`)
+        console.error(error)
+        return;
+    }
+    console.log("Minted Bats successfully. Transaction: " + result.transactionHash);
 }
 
 /**
