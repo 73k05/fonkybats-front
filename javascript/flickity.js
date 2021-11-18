@@ -1,4 +1,4 @@
-$('.roadmap-gallery-step2').flickity({
+const flktyStep2 = new Flickity( '.roadmap-gallery-step2', {
   autoPlay: 2500,
   freeScroll: true,
   pageDots: false,
@@ -6,7 +6,7 @@ $('.roadmap-gallery-step2').flickity({
   wrapAround: true,
 });
 
-$('.roadmap-gallery-step3').flickity({
+const flktyStep3 = new Flickity( '.roadmap-gallery-step3', {
   autoPlay: 2500,
   freeScroll: true,
   pageDots: false,
