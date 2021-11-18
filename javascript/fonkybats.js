@@ -75,6 +75,7 @@ const GET_SALE_STATE_ABI = [
     },
 ];
 
+const CONTRACT_SALE_STATE_INACTIVE = 0;
 const CONTRACT_SALE_STATE_PRESALE = 1;
 const CONTRACT_SALE_STATE_MAINSALE = 2;
 
@@ -94,12 +95,19 @@ $(document).ready(function () {
 function initSaleState() {
     getSaleState().then(contractSaleState => {
         console.log(`State gotten ${contractSaleState}`)
+        if (contractSaleState === undefined || contractSaleState == CONTRACT_SALE_STATE_INACTIVE) {
+            return;
+        }
         if (contractSaleState == CONTRACT_SALE_STATE_PRESALE) {
             displayElementById("nftPreSaleMintButton");
         }
         if (contractSaleState == CONTRACT_SALE_STATE_MAINSALE) {
             displayElementById("nftSaleMintButton");
         }
+
+        displayElementById("nftMintDiv");
+        displayElementById("headerSale");
+        hideElementById("headerLoading");
     });
 }
 

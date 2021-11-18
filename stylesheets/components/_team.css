@@ -95,3 +95,9 @@ responsive
   }
 }
 
+a:link { text-decoration: none; }
+a {
+  color: var(--white);
+}
+a:hover{color: var(--color-orange);}
+

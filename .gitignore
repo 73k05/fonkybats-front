@@ -19,6 +19,3 @@ bin-release/
 
 #IDE config folder
 .idea
-
-# Libs
-libs/
