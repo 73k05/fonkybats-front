@@ -1,4 +1,4 @@
-const NFT_CONTRACT_ADDRESS = "0x60f9ecb0dc8e5D072b43Ad0B25a03a9cCBDD89Ad";
+const NFT_CONTRACT_ADDRESS = "0x57E6dfC9b2B5320850d4F702A34d71f4A18749C6";
 const OWNER_ADDRESS = "0x9Ad99955f6938367F4A703c60a957B639D250a95";
 const NODE_API_KEY = "pXVRmm1TsgoZMNJGcG0zoiqPQJODSDvd";
 
@@ -105,18 +105,12 @@ const CONTRACT_SALE_STATE_INACTIVE = 0;
 const CONTRACT_SALE_STATE_PRESALE = 1;
 const CONTRACT_SALE_STATE_MAIN_SALE = 2;
 
-const MINTING_PRE_ORDER_PRICE=0.004
-const MINTING_MAIN_SALE_PRICE=0.001
+const MINTING_PRE_ORDER_PRICE=0.007
+const MINTING_MAIN_SALE_PRICE=0.009
 
 const network =
     NETWORK === "mainnet" || NETWORK === "live" ? "mainnet" : "rinkeby";
 const web3Instance = new Web3(Web3.givenProvider, "https://eth-" + network + ".alchemyapi.io/v2/" + NODE_API_KEY);
-
-/**
- * Init Document like displaying wallet address
- */
-$(document).ready(function () {
-});
 
 /**
  * Init sale state in UIX
