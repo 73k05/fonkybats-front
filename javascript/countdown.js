@@ -1,7 +1,7 @@
 
 //COUNTDOWN TIMER
-//edit ".25" below to change time in terms of day
-let deadline = new Date(Date.now() + 37.52 *24*3600*1000);
+//2021-12-19T23:59:59.351-06:00
+let deadline = new Date(1639979999351);
 
 let x = setInterval(function() {
 
