@@ -43,7 +43,7 @@
     </div>
 
     <div class="header-content">
-        <img alt="Welcome to fonkyBats" class="header-logo" src="resources/logo-fonkybats.png">
+        <img alt="Welcome to fonkyBats" id="open-modal" class="header-logo" src="resources/logo-fonkybats.png">
         <button class="btn header-connect" id="walletConnectButton" onclick="connectWallet()">
             <span>Connect Wallet</span></button>
 
@@ -553,8 +553,31 @@
             <span class="footer-copyright">@2021 FonkyBats. All right reserved.</span>
         </div>
     </div>
-
 </footer>
+
+<!-- Modal -->
+<div class="modal-container" id="modal-container">
+    <div class="modal-content">
+        <div class="modal-close close-modal" title="Close">
+            <span>x</span>
+        </div>
+
+        <div class="modal-success">
+            <h1 class="modal-title is-success">Good Job !</h1>
+            <p class="modal-description">You've successfully Minted 5 Fonky Bats NFTs, trade them now on OpenSea...</p>
+        </div>
+
+        <div class="modal-fail">
+            <h1 class="modal-title is-fail">Mint Error !</h1>
+            <p class="modal-description">Please check your MetaMask connection</p>
+        </div>
+
+        <button class="btn modal-button close-modal">
+            <span>Close modal</span>
+        </button>
+    </div>
+</div>
+
 </body>
 
 <script src="libs/jquery-3.6.0.min.js"></script>
@@ -565,5 +588,6 @@
 <script src="javascript/flickity.js" type="text/javascript"></script>
 <script src="javascript/accordion.js" type="text/javascript"></script>
 <script src="javascript/countdown.js" type="text/javascript"></script>
+<script src="javascript/popup.js" type="text/javascript"></script>
 
 </html>
