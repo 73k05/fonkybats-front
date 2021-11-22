@@ -139,11 +139,20 @@ header components
   z-index: 100;
 } 
 
+.header-form-price {
+  display: block;
+  margin-top: 1.5rem;
+}
+
+.header-form-price > b {
+  color: var(--white);
+}
+
 .header-form-adress {
   background-color: black;
   border-radius: 7rem;
   border: 0.3rem solid #838585;
-  color: #fff;
+  color: var(--white);
   margin-top: 2rem;
   outline: 0;
   padding: 1.6rem 3rem;
