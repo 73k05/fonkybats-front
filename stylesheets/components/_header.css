@@ -87,6 +87,10 @@ header components
   margin: 0 auto;
 }
 
+.header-connect.is-mobile {
+  display: none;
+}
+
 /* form */
 .header-form {
   background-color: rgba(0, 0, 0, 0.7);
@@ -217,6 +221,7 @@ header components
   max-width: 65rem;
   padding: 2rem 3rem;
   text-align: center;
+  width: 100%;
 }
 
 .countdown-title {
@@ -293,12 +298,23 @@ responsive
     width: 100%;
   }
 
+  .header-connect {
+    display: none;
+  }
+  .header-connect.is-mobile {
+    display: inline-block;
+  }
+
   .header-content {
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: stretch;
+    display: flex;
+    left: 3rem;
+    position: absolute;
+    right: 3rem;
     top: 50%;
     transform: translate(0, -50%);
-    position: absolute;
-    left: 3rem;
-    right: 3rem;
   }
 }
 
