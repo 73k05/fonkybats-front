@@ -63,6 +63,10 @@ Accordion components
   width: 56rem;
 }
 
+.about-aside > img.is-mobile {
+  display: none;
+}
+
 /* helmet */
 .about-helmet {
   margin-top: 12rem;
@@ -109,9 +113,21 @@ responsive
   .about {
     padding: 5rem 0 6rem;
   }
-  
+
+  .about-intro {
+    flex-direction: column;
+  }
+
   .about-aside {
+    margin: 2rem 0 0 0;
+    flex: 1;
+  }
+
+  .about-aside > img {
     display: none;
+  }
+  .about-aside > img.is-mobile {
+    display: block;
   }
 
   .about-content > p {
@@ -132,6 +148,11 @@ responsive
 @media (max-width: 680px) {
   .about-title {
     max-width: 100%;
+  }
+
+  .about-aside > img {
+    height: auto;
+    width: 100%;
   }
 
   .about-helmet {
