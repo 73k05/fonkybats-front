@@ -214,8 +214,13 @@ responsive
   }
 
   .roadmap-content-right {
-    margin: 3rem 0 0;
+    margin: 2rem 0 0;
     flex: 1;
+  }
+
+  .roadmap-content-right > img {
+    height: 100%;
+    width: 100%;
   }
 }
 
