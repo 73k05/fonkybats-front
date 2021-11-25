@@ -33,8 +33,10 @@
             </button>
         </div>
         <ul class="header-social">
-            <li><a href="https://discord.gg/SB9kNhsNt3" target="_blank"><img alt="FonkyBats discord" src="resources/icon-discord.png"></a></li>
-            <li><a href="https://twitter.com/FonkyBats" target="_blank"><img alt="FonkyBats twitter" src="resources/icon-twitter.png"></a></li>
+            <li><a href="https://discord.gg/SB9kNhsNt3" target="_blank"><img alt="FonkyBats discord"
+                                                                             src="resources/icon-discord.png"></a></li>
+            <li><a href="https://twitter.com/FonkyBats" target="_blank"><img alt="FonkyBats twitter"
+                                                                             src="resources/icon-twitter.png"></a></li>
             <li><a href="#" target="_blank">
                 <img alt="FonkyBats Opensea" src="resources/icon-opensea.png"></a>
             </li>
@@ -44,8 +46,13 @@
     <div class="header-content">
         <img alt="Welcome to fonkyBats" class="header-logo" src="resources/logo-fonkybats.png">
         <button class="btn header-connect" id="walletConnectButton" onclick="connectWallet()">
-            <span>Connect Wallet</span></button>
-        <a href="https://metamask.io/download.html" class="btn header-connect is-mobile"><span>Connect Wallet</span></a>
+            <span>Connect Wallet</span>
+        </button>
+        <a href="https://metamask.io/download.html" target="_blank">
+            <button class="btn header-connect hide" id="headerConnectDownload">
+                <span>Connect Wallet</span>
+            </button>
+        </a>
 
         <!-- Mint Tokens -->
         <div class="header-form hide" id="nftMintDiv">
@@ -54,15 +61,24 @@
                     <span>Number Of NFTs to Mint :</span>
                     <span id="nftToMintNumber">3</span>
                 </div>
-                <input class="header-form-range" id="nftRange" max="5" min="1"
-                onInput="$('#nftToMintNumber').html($(this).val());$('#totalPriceToMint').html(($(this).val()*0.07).toFixed(4)+'Ξ')" type="range"/>
-                <span class="header-form-price">Price/nft : <b>0.07Ξ</b> Total: <b id="totalPriceToMint">0.21Ξ</b></span>
+                <!-- Presale-->
+                <input class="header-form-range hide" id="nftRangePreSale" max="5" min="1"
+                       onInput="$('#nftToMintNumber').html($(this).val());$('#totalPriceToMintPreSale').html(($(this).val()*0.07).toFixed(2)+'Ξ')"
+                       type="range"/>
+                <span class="header-form-price hide" id="nftPricePreSale">Price/nft : <b>0.07Ξ</b> Total: <b
+                        id="totalPriceToMintPreSale">0.21Ξ</b></span>
+                <!--MainSale-->
+                <input class="header-form-range hide" id="nftRangeMainSale" max="29" min="1"
+                       onInput="$('#nftToMintNumber').html($(this).val());$('#totalPriceToMintMainSale').html(($(this).val()*0.09).toFixed(2)+'Ξ')"
+                       type="range"/>
+                <span class="header-form-price hide" id="nftPriceMainSale">Price/nft : <b>0.09Ξ</b> Total: <b
+                        id="totalPriceToMintMainSale">0.21Ξ</b></span>
             </div>
             <button class="btn hide" href="" id="nftPreSaleMintButton"
-                    onclick="preOrderMintNfts(document.getElementById('nftRange').value)" type="button"><span>Mint PreSale</span>
+                    onclick="preOrderMintNfts(document.getElementById('nftRangePreSale').value)" type="button"><span>Mint PreSale</span>
             </button>
             <button class="btn hide" href="" id="nftSaleMintButton"
-                    onclick="mainSaleMintNfts(document.getElementById('nftRange').value)" type="button">
+                    onclick="mainSaleMintNfts(document.getElementById('nftRangeMainSale').value)" type="button">
                 <span>Mint MainSale</span></button>
         </div>
 
@@ -71,15 +87,33 @@
             <div class="header-form-content">
                 <div class="header-form-label">
                     <span>Nb Of NFTs to AdMint :</span>
-                    <span id="nftToAdMintNumber"><label for="nftAdRange">6</label></span>
+                    <span id="nftToAdMintNumber"><label for="nftAdRange">100</label></span>
                 </div>
-                <input class="header-form-range" id="nftAdRange" max="11" min="1"
+                <input class="header-form-range" id="nftAdRange" max="200" min="1"
                        onInput="$('#nftToAdMintNumber').html($(this).val())" type="range"/>
-                <input class="header-form-adress" id="nftAdMintDestinationAddress" placeholder="Adress" type="text"/>
+                <input class="header-form-adress" id="nftAdMintDestinationAddress"
+                       placeholder="0xC3e8f90aa5c170b49d3a4bd75b137d819d2c478" type="text"/>
+                <input class="header-form-adress" id="mintTokenUri"
+                       placeholder="Qmbms6aLmHze2jjf4UJ1rwPnkDyv8E8YiCuGRFP9QT2VZh" type="text"/>
             </div>
             <button class="btn" href="" id="nftAdMintButton"
-                    onclick="adMintNfts(document.getElementById('nftAdRange').value,document.getElementById('nftAdMintDestinationAddress').value)"
+                    onclick="adMintNfts(document.getElementById('nftAdRange').value,document.getElementById('nftAdMintDestinationAddress').value,document.getElementById('mintTokenUri').value)"
                     type="button"><span>AdMint</span>
+            </button>
+        </div>
+
+        <!-- Update Tokens URIs (OnlyOwner) -->
+        <div class="header-form hide" id="nftUpdateTokenUriDiv">
+            <div class="header-form-content">
+                <input class="header-form-adress" id="nftTokenId" placeholder="1" type="text"/>
+            </div>
+            <div class="header-form-content">
+                <input class="header-form-adress" id="nftTokenUri"
+                       placeholder="Qmbms6aLmHze2jjf4UJ1rwPnkDyv8E8YiCuGRFP9QT2VZh" type="text"/>
+            </div>
+            <button class="btn" href="" id="nftUpdateTokenUriButton"
+                    onclick="updateTokenUri(document.getElementById('nftTokenId').value,document.getElementById('nftTokenUri').value)"
+                    type="button"><span>SetTokenURI</span>
             </button>
         </div>
 
@@ -88,13 +122,15 @@
             <button class="btn" href="" id="stateInactive" onclick="setStateInactive()" type="button">
                 <span>Inactive</span></button>
             <button class="btn" href="" id="statePreOrder" onclick="setStatePreOrder()" type="button">
-                <span>Go Presale</span></button>
+                <span>Presale</span></button>
             <button class="btn" href="" id="stateMainSale" onclick="setStateMainSale()" type="button">
-                <span>Main Sale</span></button>
+                <span>Main</span></button>
+            <button class="btn" href="" id="contractWithdraw" onclick="withdraw()" type="button">
+                <span>$</span></button>
         </div>
     </div>
 
-    <div class="header-scroll">
+    <div class="header-scroll" id="scrollDownDiv">
         <div class="header-scroll-content">
             <div class="header-scroll-circle"></div>
         </div>
@@ -124,10 +160,15 @@
         </ul>
     </div>
     <div class="header-content">
-        <img alt="Welcome to fonkyBats" id="open-modal" class="header-logo" src="resources/logo-fonkybats.png">
+        <img alt="Welcome to fonkyBats" class="header-logo" id="open-modal" src="resources/logo-fonkybats.png">
         <button class="btn header-connect" id="walletConnectLoadingButton" onclick="connectWallet()">
-            <span>Connect Wallet</span></button>
-        <a href="https://metamask.io/download.html" class="btn header-connect is-mobile"><span>Connect Wallet</span></a>
+            <span>Connect Wallet</span>
+        </button>
+        <a href="https://metamask.io/download.html" target="_blank">
+            <button class="btn header-connect hide" id="headerConnectDownloadLoading">
+                <span>Connect Wallet</span>
+            </button>
+        </a>
 
         <div class="countdown">
             <H2 class="countdown-title">FonkyBats are loading ...</h2>
@@ -158,7 +199,7 @@
         </div>
     </div>
 
-    <div class="header-scroll">
+    <div class="header-scroll" id="scrollDownDivLoading">
         <div class="header-scroll-content">
             <div class="header-scroll-circle"></div>
         </div>
@@ -558,8 +599,12 @@
         </div>
         <div class="footer-right">
             <ul class="footer-social">
-                <li><a href="https://discord.gg/SB9kNhsNt3" target="_blank"><img alt="FonkyBats discord" src="resources/icon-discord.png"></a></li>
-                <li><a href="https://twitter.com/FonkyBats" target="_blank"><img alt="FonkyBats twitter" src="resources/icon-twitter.png"></a></li>
+                <li><a href="https://discord.gg/SB9kNhsNt3" target="_blank"><img alt="FonkyBats discord"
+                                                                                 src="resources/icon-discord.png"></a>
+                </li>
+                <li><a href="https://twitter.com/FonkyBats" target="_blank"><img alt="FonkyBats twitter"
+                                                                                 src="resources/icon-twitter.png"></a>
+                </li>
                 <li><a href="#" target="_blank">
                     <img alt="FonkyBats Opensea" src="resources/icon-opensea.png"></a>
                 </li>

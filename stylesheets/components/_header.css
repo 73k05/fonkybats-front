@@ -22,6 +22,9 @@ header components
   right: 0;
   z-index: 1;
 }
+.header-hide-after:after {
+  display: none;
+}
 
 /* modifiers */
 .header.is-waiting .header-social {
@@ -87,7 +90,7 @@ header components
   margin: 0 auto;
 }
 
-.header-connect.is-mobile {
+.header-connect.hide {
   display: none;
 }
 
@@ -298,9 +301,6 @@ responsive
     width: 100%;
   }
 
-  .header-connect {
-    display: none;
-  }
   .header-connect.is-mobile {
     display: inline-block;
   }
@@ -369,5 +369,17 @@ responsive
 }
 
 .header.hide{
+  display: none;
+}
+
+.header-scroll.hide {
+  display: none;
+}
+
+.header-form-range.hide {
+  display: none;
+}
+
+.header-form-price.hide {
   display: none;
 }
