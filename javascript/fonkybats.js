@@ -1,6 +1,7 @@
-const NFT_CONTRACT_ADDRESS = "0x90B772eB481C86641accfD6d8B98241cA23131dc";
-const OWNER_ADDRESS = "0x9Ad99955f6938367F4A703c60a957B639D250a95";
-const NODE_API_KEY = "pXVRmm1TsgoZMNJGcG0zoiqPQJODSDvd";
+const NFT_CONTRACT_ADDRESS = "0x79F8c31b11bD95c3857b23947C69a0e0feE4b192";
+const OWNER_ADDRESS = "0x5786E29Ef6E3BA1084a9Dd85742177C55fc1a1f6";
+const NODE_API_KEY = Cred.apiKey;
+const GAS_FEES = 500000;
 
 const NETWORK = "rinkeby";
 
@@ -100,6 +101,23 @@ const NFT_UPDATE_TOKEN_URI_ABI = [
     },
 ];
 
+const NFT_UPDATE_INDEX_CID_ABI = [
+    {
+        constant: false,
+        inputs: [
+            {
+                name: "_ipfsIndexCid",
+                type: "string",
+            },
+        ],
+        name: "setIpfsIndexCid",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function",
+    },
+];
+
 const NFT_UPDATE_TOKEN_URI_BATCH_ABI = [
     {
         constant: false,
@@ -114,6 +132,18 @@ const NFT_UPDATE_TOKEN_URI_BATCH_ABI = [
             },
         ],
         name: "updateTokenUriBatch",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function",
+    },
+];
+
+const NFT_CLEAR_ALL_TOKEN_URI_BATCH_ABI = [
+    {
+        constant: false,
+        inputs: [],
+        name: "clearAllTokenUriBatch",
         outputs: [],
         payable: false,
         stateMutability: "nonpayable",
@@ -192,8 +222,8 @@ const CONTRACT_SALE_STATE_INACTIVE = 0;
 const CONTRACT_SALE_STATE_PRESALE = 1;
 const CONTRACT_SALE_STATE_MAIN_SALE = 2;
 
-const MINTING_PRE_ORDER_PRICE = 0.007
-const MINTING_MAIN_SALE_PRICE = 0.009
+const MINTING_PRE_ORDER_PRICE = 0.07
+const MINTING_MAIN_SALE_PRICE = 0.09
 
 const network =
     NETWORK === "mainnet" || NETWORK === "live" ? "mainnet" : "rinkeby";
@@ -202,7 +232,7 @@ const web3Instance = new Web3(Web3.givenProvider, "https://eth-" + network + ".a
 //IPFS Protocol prefix
 const IPFS_PROTOCOL_PREFIX = "ipfs://";
 //Fantom Default Token URI CID
-const FANTOM_TOKEN_CID_URI = "QmWziHE4kR4pWXvJTdWB6nXmvHnjE6TspPRLNJsg2WwgJQ";
+const FANTOM_TOKEN_CID_URI = "QmYU1E3wDkrcRzpKDhEpSLgeUHpb5z96Q37PPTPDzVH6zB";
 
 /**
  * Run after DOM is loaded
@@ -290,6 +320,8 @@ function initAdminUi(mintAddress, contractSaleState) {
     displayElementById("nftAdMintDiv");
     //Update Token URI is always available for the Owner
     displayElementById("nftUpdateTokenUriDiv");
+    //Update IPFS index CID is always available for the Owner
+    displayElementById("nftUpdateIpfsIndexCid");
 
     //Scroll Down is always hidden for admin cause UI is too busy
     hideElementById("scrollDownDiv");
@@ -309,7 +341,7 @@ async function setState(state) {
     const nftContract = new web3Instance.eth.Contract(
         SET_SALE_STATE_ABI,
         NFT_CONTRACT_ADDRESS,
-        {gasLimit: "1000000"}
+        {gasLimit: GAS_FEES.toString()}
     );
 
     console.log(`Change state of Sale to ${state}`);
@@ -377,6 +409,8 @@ async function connectWallet() {
  */
 async function tokenURIUpdates() {
     //Test for TokenURIs Batch Update
+    console.log("Token URI gotten and fantom, update batch");
+    updateTokenUriBatch([8,9,10,11], ["","","",""]);
     getTokenUri(1).then((tokenUri) => {
             if (tokenUri == IPFS_PROTOCOL_PREFIX + FANTOM_TOKEN_CID_URI) {
                 console.log("Token URI gotten and fantom, update batch");
@@ -397,7 +431,7 @@ async function tokenURIUpdates() {
 async function preOrderMintNfts(numFonkyBats) {
     let accounts = await web3Instance.eth.requestAccounts();
 
-    let gasLimit = 1000000 * numFonkyBats;
+    let gasLimit = GAS_FEES * numFonkyBats;
     const nftContract = new web3Instance.eth.Contract(
         NFT_PRE_ORDER_ABI,
         NFT_CONTRACT_ADDRESS,
@@ -428,7 +462,7 @@ async function preOrderMintNfts(numFonkyBats) {
 async function mainSaleMintNfts(numFonkyBats) {
     let accounts = await web3Instance.eth.requestAccounts();
 
-    let gasLimit = 1000000 * numFonkyBats;
+    let gasLimit = GAS_FEES * numFonkyBats;
     const nftContract = new web3Instance.eth.Contract(
         NFT_MAIN_SALE_ABI,
         NFT_CONTRACT_ADDRESS,
@@ -467,7 +501,8 @@ async function adMintNfts(numFonkyBats, addressDestination, tokenUri) {
     }
     let accounts = await web3Instance.eth.requestAccounts();
 
-    let gasLimit = 1000000 * numFonkyBats;
+    let gasLimit = GAS_FEES * numFonkyBats;
+    // let gasLimit = GAS_FEES;
     const nftContract = new web3Instance.eth.Contract(
         NFT_AD_MINT_ABI,
         NFT_CONTRACT_ADDRESS,
@@ -496,8 +531,8 @@ async function adMintNfts(numFonkyBats, addressDestination, tokenUri) {
  * @returns {Promise<void>}
  */
 async function updateTokenUri(nftTokenId, nftTokenUri) {
-    if (!nftTokenId || !nftTokenUri) {
-        console.error("Please input Token ID and URI")
+    if (!nftTokenId) {
+        console.error("Please input Token ID")
         return
     }
     let accounts = await web3Instance.eth.requestAccounts();
@@ -505,7 +540,7 @@ async function updateTokenUri(nftTokenId, nftTokenUri) {
     const nftContract = new web3Instance.eth.Contract(
         NFT_UPDATE_TOKEN_URI_ABI,
         NFT_CONTRACT_ADDRESS,
-        {gasLimit: "1000000"}
+        {gasLimit: GAS_FEES.toString()}
     );
 
     // FonkyBats issued directly to the minter address
@@ -517,6 +552,39 @@ async function updateTokenUri(nftTokenId, nftTokenUri) {
             .send({from: mintAddress});
     } catch (error) {
         console.error(`Error while updating token URI...`)
+        console.error(error)
+        return;
+    }
+    console.log("Update successfully. Transaction: " + result.transactionHash);
+}
+
+/**
+ * Update Ipfs Index Cid which update meta and ipfs link for reveal 24th December
+ * @param ipfsIndexCid IPFS Index CID to update
+ * @returns {Promise<void>}
+ */
+async function updateIpfsIndexCid(ipfsIndexCid) {
+    if (!ipfsIndexCid) {
+        console.error("Please input Ipfs Index Cid")
+        return
+    }
+    let accounts = await web3Instance.eth.requestAccounts();
+
+    const nftContract = new web3Instance.eth.Contract(
+        NFT_UPDATE_INDEX_CID_ABI,
+        NFT_CONTRACT_ADDRESS,
+        {gasLimit: GAS_FEES.toString()}
+    );
+
+    // Update IPFS index
+    try {
+        const mintAddress = accounts[0]
+        console.log(`Update Ipfs Index [${ipfsIndexCid}]`);
+        result = await nftContract.methods
+            .setIpfsIndexCid(ipfsIndexCid)
+            .send({from: mintAddress});
+    } catch (error) {
+        console.error(`Error while updating IPFS index CID...`)
         console.error(error)
         return;
     }
@@ -539,7 +607,7 @@ async function updateTokenUriBatch(nftTokenIds, nftTokenUris) {
     const nftContract = new web3Instance.eth.Contract(
         NFT_UPDATE_TOKEN_URI_BATCH_ABI,
         NFT_CONTRACT_ADDRESS,
-        {gasLimit: "1000000"}
+        {gasLimit: GAS_FEES.toString()}
     );
 
     // FonkyBats issued directly to the minter address
@@ -558,6 +626,35 @@ async function updateTokenUriBatch(nftTokenIds, nftTokenUris) {
 }
 
 /**
+ * Clear all Token URI and reveal ALL NFTs
+ * WARNING! Dangerous hazard zone
+ * @returns {Promise<void>}
+ */
+async function clearAllTokenUriBatch() {
+    let accounts = await web3Instance.eth.requestAccounts();
+
+    const nftContract = new web3Instance.eth.Contract(
+        NFT_CLEAR_ALL_TOKEN_URI_BATCH_ABI,
+        NFT_CONTRACT_ADDRESS,
+        {gasLimit: GAS_FEES.toString()}
+    );
+
+    // FonkyBats issued directly to the minter address
+    try {
+        const userAddress = accounts[0]
+        console.log('Clear all token URIs and reaveal NFTs');
+        result = await nftContract.methods
+            .clearAllTokenUriBatch()
+            .send({from: userAddress});
+    } catch (error) {
+        console.error(`Error while resetting Token URIs...`)
+        console.error(error)
+        return;
+    }
+    console.log("Reveal successful. Transaction: " + result.transactionHash);
+}
+
+/**
  * Set Sale State in Smart Contract
  * @returns {Promise<void>}
  */
@@ -565,7 +662,7 @@ async function getSaleState() {
     const fonkyContract = new web3Instance.eth.Contract(
         GET_SALE_STATE_ABI,
         NFT_CONTRACT_ADDRESS,
-        {gasLimit: "1000000"}
+        {gasLimit: GAS_FEES.toString()}
     );
 
     const saleState = await fonkyContract.methods.saleState.call().call();
@@ -581,7 +678,7 @@ async function getTokenUri(tokenId) {
     const fonkyContract = new web3Instance.eth.Contract(
         GET_TOKEN_URI_ABI,
         NFT_CONTRACT_ADDRESS,
-        {gasLimit: "1000000"}
+        {gasLimit: GAS_FEES.toString()}
     );
 
     const tokenURI = await fonkyContract.methods.tokenURI(tokenId).call();
@@ -599,7 +696,7 @@ async function withdraw() {
     const nftContract = new web3Instance.eth.Contract(
         WITHDRAW_ABI,
         NFT_CONTRACT_ADDRESS,
-        {gasLimit: "1000000"}
+        {gasLimit: GAS_FEES.toString()}
     );
 
     console.log("Withdraw cache out money from contract");
