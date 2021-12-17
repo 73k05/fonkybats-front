@@ -264,10 +264,10 @@ function initSaleState() {
             return contractSaleState;
         }
         if (contractSaleState == CONTRACT_SALE_STATE_PRESALE) {
-            displayElementById("nftPreSaleMintButton");
+            displayPreSale();
         }
         if (contractSaleState == CONTRACT_SALE_STATE_MAIN_SALE) {
-            displayElementById("nftSaleMintButton");
+            displayMainSale();
         }
 
         displayElementById("nftMintDiv");
@@ -295,22 +295,10 @@ function initAdminUi(mintAddress, contractSaleState) {
         displayElementById("nftMintDiv");
     }
     if (contractSaleState == CONTRACT_SALE_STATE_PRESALE) {
-        hideElementById("nftSaleMintButton");
-        displayElementById("nftPreSaleMintButton");
-
-        hideElementById("nftRangePreSale");
-        hideElementById("nftRangePreSale");
-        displayElementById("nftRangePreSale");
-        displayElementById("nftPricePreSale");
+        displayPreSale();
     }
     if (contractSaleState == CONTRACT_SALE_STATE_MAIN_SALE) {
-        hideElementById("nftPreSaleMintButton");
-        displayElementById("nftSaleMintButton");
-
-        hideElementById("nftRangePreSale");
-        hideElementById("nftPricePreSale");
-        displayElementById("nftRangeMainSale");
-        displayElementById("nftPriceMainSale");
+        displayMainSale();
     }
 
     displayElementById("headerSale");
@@ -328,6 +316,26 @@ function initAdminUi(mintAddress, contractSaleState) {
     hideElementById("scrollDownDivLoading");
     //We add so many items that we should hide stuff that make the UI clunky
     document.getElementById('headerSale').classList.add("header-hide-after");
+}
+
+function displayPreSale(){
+    hideElementById("nftSaleMintButton");
+    displayElementById("nftPreSaleMintButton");
+
+    hideElementById("nftRangeMainSale");
+    hideElementById("nftPriceMainSale");
+    displayElementById("nftRangePreSale");
+    displayElementById("nftPricePreSale");
+}
+
+function displayMainSale(){
+    hideElementById("nftPreSaleMintButton");
+    displayElementById("nftSaleMintButton");
+
+    hideElementById("nftRangePreSale");
+    hideElementById("nftPricePreSale");
+    displayElementById("nftRangeMainSale");
+    displayElementById("nftPriceMainSale");
 }
 
 /**
